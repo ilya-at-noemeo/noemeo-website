@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Noemeo — honest feedback on your photographs</title>
+<meta name="description" content="Noemeo reviews your photographs the way a thoughtful editor would — what works, what holds the image back, and what to try next — and talks it through with you. Works on its own or with Lightroom Classic. In closed beta.">
+<meta property="og:title" content="Noemeo — honest feedback on your photographs">
+<meta property="og:description" content="AI photo critique that talks it through with you. Your photos stay on your computer.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://noemeo.com/">
+<link rel="canonical" href="https://noemeo.com/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231d1e20'/%3E%3Ccircle cx='16' cy='16' r='7' fill='none' stroke='%23d9614c' stroke-width='3'/%3E%3C/svg%3E">
+<style>
+  :root {
+    color-scheme: light dark;
+    --paper: #f2eee6;
+    --card: #fbf9f4;
+    --line: #ddd6c8;
+    --ink: #1d1e20;
+    --fog: #5f5a52;
+    --signal: #a63626;
+    --brass: #7a5c1c;
+    --serif: Georgia, 'Iowan Old Style', 'Times New Roman', serif;
+    --mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #17181a;
+      --card: #202124;
+      --line: #35363a;
+      --ink: #ede9e1;
+      --fog: #a8a295;
+      --signal: #e07a66;
+      --brass: #c79a44;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+  }
+  a { color: var(--signal); text-underline-offset: 0.18em; }
+  a:focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; border-radius: 2px; }
+  .wrap { max-width: 46rem; margin: 0 auto; padding: 0 1.25rem; }
+
+  header.top { border-bottom: 1px solid var(--line); }
+  header.top .wrap { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; padding-top: 1.1rem; padding-bottom: 1.1rem; }
+  .wordmark { font-family: var(--mono); font-weight: 600; letter-spacing: 0.08em; font-size: 1rem; }
+  .eyebrow {
+    font-family: var(--mono);
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    font-size: 0.72rem;
+    color: var(--brass);
+  }
+
+  .hero { padding: 4.5rem 0 3rem; }
+  .hero h1 {
+    font-weight: 400;
+    font-size: clamp(2rem, 6vw, 3rem);
+    line-height: 1.15;
+    margin: 0.6rem 0 1.2rem;
+    letter-spacing: -0.01em;
+  }
+  .hero p.lede { font-size: 1.2rem; color: var(--fog); margin: 0 0 1.75rem; max-width: 36rem; }
+  .hero .eyebrow { margin: 0; }
+  .button {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #fbf3ee;
+    background: #a63626;
+    padding: 0.8rem 1.15rem;
+    border-radius: 6px;
+  }
+  .button:hover { opacity: 0.9; }
+
+  section { padding: 2.5rem 0; border-top: 1px solid var(--line); }
+  section h2 { font-weight: 400; font-size: 1.55rem; margin: 0.4rem 0 1.25rem; }
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.25rem; }
+  .steps li { display: grid; grid-template-columns: 2.25rem 1fr; gap: 0.75rem; }
+  .steps .n { font-family: var(--mono); color: var(--signal); font-size: 0.9rem; padding-top: 0.2rem; }
+  .steps h3 { margin: 0 0 0.2rem; font-size: 1.1rem; font-weight: 600; }
+  .steps p { margin: 0; color: var(--fog); }
+  ul.plain { margin: 0; padding-left: 1.2rem; }
+  ul.plain li + li { margin-top: 0.5rem; }
+  .note { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 1.25rem 1.4rem; }
+  .note p { margin: 0; }
+  .note p + p { margin-top: 0.75rem; }
+
+  footer { border-top: 1px solid var(--line); padding: 2rem 0 3rem; color: var(--fog); font-size: 0.9rem; }
+  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.75rem; }
+</style>
+</head>
+<body>
+  <header class="top">
+    <div class="wrap">
+      <span class="wordmark">NOEMEO</span>
+      <span class="eyebrow">Closed beta</span>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="hero">
+      <p class="eyebrow">For photographers</p>
+      <h1>Honest feedback on your photographs.</h1>
+      <p class="lede">Noemeo reviews a photo the way a thoughtful editor would — what works, what holds the image back, and what to try next — then talks it through with you.</p>
+      <a class="button" href="mailto:ilya@noemeo.com?subject=Noemeo%20beta%20access">Request beta access</a>
+    </div>
+
+    <section aria-labelledby="how">
+      <p class="eyebrow">How it works</p>
+      <h2 id="how">A critique you can argue with</h2>
+      <ol class="steps">
+        <li>
+          <span class="n">01</span>
+          <div>
+            <h3>Review</h3>
+            <p>Add a photo and get a verdict on its craft and emotional impact, with a written critique: what's working, what isn't, and concrete suggestions.</p>
+          </div>
+        </li>
+        <li>
+          <span class="n">02</span>
+          <div>
+            <h3>Talk it through</h3>
+            <p>Ask why, push back, or explain what you were going for. Noemeo takes what you tell it into account, and you can see and remove anything it remembers about a photo.</p>
+          </div>
+        </li>
+        <li>
+          <span class="n">03</span>
+          <div>
+            <h3>Edit and compare</h3>
+            <p>Bring in a new version and ask whether it's better. Noemeo compares it against what came before instead of judging it from scratch.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section aria-labelledby="lightroom">
+      <p class="eyebrow">Works with Lightroom Classic</p>
+      <h2 id="lightroom">Review photos straight from your catalog</h2>
+      <ul class="plain">
+        <li>Review selected photos from the Library menu and keep the critique alongside each photo.</li>
+        <li>Suggested ratings and flags are only ever suggestions — Noemeo asks before changing anything, and you can undo it.</li>
+        <li>Suggest descriptive keywords for your photos.</li>
+        <li>Lightroom is optional: you can also add photos to Noemeo directly.</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="privacy">
+      <p class="eyebrow">Privacy</p>
+      <h2 id="privacy">Your photos stay on your computer</h2>
+      <div class="note">
+        <p>Your photos, conversations and everything Noemeo learns about them are kept on your own computer — not in Noemeo's cloud.</p>
+        <p>To give feedback, Noemeo sends only the photo and text needed for that one review to an AI model, through Amazon Web Services. It is processed for that request and not stored. Noemeo's cloud keeps only what an account needs: your sign-in, the names of the computers you use Noemeo on, and how much of your allowance you've used.</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="beta">
+      <p class="eyebrow">Availability</p>
+      <h2 id="beta">Noemeo is in closed beta</h2>
+      <p>We're opening access to a small group of photographers first. If you'd like to try it, write to <a href="mailto:ilya@noemeo.com?subject=Noemeo%20beta%20access">ilya@noemeo.com</a> and tell us a little about how you work.</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span>© 2026 Noemeo</span>
+      <a href="mailto:ilya@noemeo.com">ilya@noemeo.com</a>
+    </div>
+  </footer>
+</body>
+</html>
