@@ -99,6 +99,29 @@
 
   footer { border-top: 1px solid var(--line); padding: 2rem 0 3rem; color: var(--fog); font-size: 0.9rem; }
   footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.75rem; }
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 0 0 1.75rem; }
+  @media (max-width: 640px) { .pair { grid-template-columns: 1fr; } }
+  figure { margin: 0; }
+  figure img { display: block; width: 100%; height: auto; border-radius: 6px; }
+  figcaption { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--fog); margin-top: 0.45rem; }
+  .dialogue { display: grid; gap: 1.1rem; }
+  .turn { display: grid; grid-template-columns: 7.5rem 1fr; gap: 0.75rem; }
+  @media (max-width: 640px) { .turn { grid-template-columns: 1fr; gap: 0.2rem; } }
+  .who { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; padding-top: 0.3rem; }
+  .turn.ai .who { color: var(--signal); }
+  .turn.me .who { color: var(--brass); }
+  .said p { margin: 0; }
+  .said p + p { margin-top: 0.6rem; }
+  .turn.me .said { font-style: italic; }
+  .said .aside { font-family: var(--mono); font-size: 0.75rem; color: var(--fog); margin-bottom: 0.4rem; font-style: normal; }
+  .edit { margin-top: 0.85rem; background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 0.85rem 1rem; }
+  .edit-head { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--fog); margin: 0 0 0.5rem; }
+  .edit dl { margin: 0; }
+  .edit dt { font-weight: 600; font-size: 0.95rem; }
+  .edit dd { margin: 0.15rem 0 0.6rem; color: var(--fog); font-size: 0.95rem; }
+  .edit dd:last-child { margin-bottom: 0; }
+  .omitted { margin: 0; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--fog); text-align: center; }
+  .fine { margin: 1.5rem 0 0; font-size: 0.85rem; color: var(--fog); }
 </style>
 </head>
 <body>
@@ -143,6 +166,66 @@
           </div>
         </li>
       </ol>
+    </section>
+
+    <section aria-labelledby="example">
+      <p class="eyebrow">A real session</p>
+      <h2 id="example">A winter farm: which subject leads?</h2>
+      <div class="pair">
+        <figure>
+          <img src="images/farm-before.jpg" width="1600" height="1065" loading="lazy"
+               alt="First version: a black-and-white elevated view of snowy farmland with a farmhouse and trees at left, a lone bare tree in the centre-right, curving tracks, and a row of dark conifers clipped along the bottom edge.">
+          <figcaption>First version</figcaption>
+        </figure>
+        <figure>
+          <img src="images/farm-after.jpg" width="1600" height="945" loading="lazy"
+               alt="Final version: cropped from the top and bottom so the dark conifers along the lower edge are gone; the lone tree and its long shadow lead, the farmhouse is quieter, and the snow is brighter.">
+          <figcaption>Final version</figcaption>
+        </figure>
+      </div>
+
+      <div class="dialogue">
+        <div class="turn ai">
+          <span class="who">Noemeo</span>
+          <div class="said"><p>The elevated view turns the snow-covered farmland into a subdued graphic study. Roads, tracks, fences, and field contours create layered diagonals and gentle curves, while the bare trees and small farmstead provide scale and a restrained human presence. Monochrome suits the winter austerity, and the long shadows add dimensionality and a quiet, isolated mood. Detail remains sufficiently legible throughout without undermining the atmospheric softness. The frame lacks a fully dominant point of interest: the farmstead, large foreground tree, and scattered upper trees compete at similar visual strength. The brightest, sparsest snowfield across the upper-right occupies substantial space without adding equivalent structure, and the dark conifers clipped along the bottom edge feel like an accidental border intrusion. Tonally, much of the snow sits in a narrow pale-gray range, which weakens separation among the field patterns and makes the composition feel flatter than the underlying forms warrant.</p></div>
+        </div>
+        <div class="turn me">
+          <span class="who">Photographer</span>
+          <div class="said"><p>I would make the house the primary focus, and the lonely tree secondary.</p></div>
+        </div>
+        <div class="turn ai">
+          <span class="who">Noemeo</span>
+          <div class="said"><p>That gives the frame a clearer hierarchy: the farmstead should anchor the scene, with one isolated tree acting as a secondary counterpoint. I’d guide attention locally rather than increasing contrast across the whole landscape. Brighten and add modest texture to the house and its adjoining trees, then give the lonely tree a smaller lift. Slightly suppress the bright, relatively empty upper-right snowfield and the dark conifers at the bottom edge so they stop competing. A restrained crop from the top and bottom could further concentrate the relationship without losing the sweeping field patterns.</p><div class="edit"><p class="edit-head">Suggested edit · Lightroom · excerpt, 2 of 5 adjustments</p><dl><dt>Masking – Radial Gradient</dt><dd>Place a broad, feathered mask over the house/farmstead; raise Exposure slightly and add modest Texture or Clarity so the structure separates from its dark surroundings.</dd><dt>Crop</dt><dd>Trim modestly from the top and bottom, especially the clipped dark conifers along the lower edge, while preserving the diagonal tracks and enough surrounding space to sustain the lonely mood.</dd></dl></div></div>
+        </div>
+        <p class="omitted">Some turns omitted</p>
+        <div class="turn me">
+          <span class="who">Photographer</span>
+          <div class="said"><p>In fact, I think that the tree should be primary to the house</p></div>
+        </div>
+        <div class="turn ai">
+          <span class="who">Noemeo</span>
+          <div class="said"><p>That changes the read in a useful way: the current edit already favors the tree through its larger scale, dark silhouette, and separation against the snow. The house then works as a quieter contextual anchor, giving the tree its sense of solitude and place. I would not brighten the house as previously suggested. Instead, keep it slightly subdued and make only a restrained local enhancement to the tree so its branches remain distinct without looking overprocessed.</p></div>
+        </div>
+        <p class="omitted">Some turns omitted</p>
+        <div class="turn me">
+          <span class="who">Photographer</span>
+          <div class="said"><p>Should I crop a little from the top?</p></div>
+        </div>
+        <div class="turn ai">
+          <span class="who">Noemeo</span>
+          <div class="said"><p>Yes—a small crop from the top would help. The clipped dark woodland pockets and scattered upper-edge forms attract attention without contributing much to the lonely-tree story. Trim only enough to remove most of those dark intrusions—roughly 3–5% of the frame height. Keep the small upper-field trees and ample pale snow above the tracks, so the scene retains breathing room. I would not crop aggressively: the vertical separation between the foreground tree and distant landscape is part of the feeling of solitude.</p><div class="edit"><p class="edit-head">Suggested edit · Lightroom · 1 adjustment</p><dl><dt>Crop</dt><dd>Bring the top edge down by about 3–5%, concentrating on the clipped dark woodland forms while preserving open snow above the central tracks.</dd></dl></div></div>
+        </div>
+        <p class="omitted">Some turns omitted</p>
+        <div class="turn me">
+          <span class="who">Photographer</span>
+          <div class="said"><p>I completely cropped out the bottom-edge distraction. Does this image look cleaner now?</p></div>
+        </div>
+        <div class="turn ai">
+          <span class="who">Noemeo</span>
+          <div class="said"><p class="aside">Compared with the previous version: closer to what you were going for</p><p>Yes. The bottom-edge conifers are completely gone, and the lower boundary now consists only of the patterned snowfield. That makes the frame cleaner and prevents a dark, clipped foreground band from competing with the isolated tree and its shadow. The crop also feels intentional rather than cramped: there is still enough snow below the shadow and diagonal track to support the composition. Compared with the previous version, this is a helpful change; compared with the original, it substantially simplifies both the bottom and top boundaries. I would stop cropping here—the foreground tree is already fairly close to the lower-right edge, and any further reduction would begin to squeeze it.</p></div>
+        </div>
+      </div>
+      <p class="fine">Excerpt from a real session, shared by the photographer. Noemeo’s replies are unedited; some turns are left out, and typos in the photographer’s messages are corrected.</p>
     </section>
 
     <section aria-labelledby="lightroom">
