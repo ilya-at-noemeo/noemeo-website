@@ -122,6 +122,15 @@
   .edit dd:last-child { margin-bottom: 0; }
   .omitted { margin: 0; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--fog); text-align: center; }
   .fine { margin: 1.5rem 0 0; font-size: 0.85rem; color: var(--fog); }
+  .assessment { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 0.9rem 1rem; }
+  .assessment-head { margin: 0 0 0.6rem; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--fog); }
+  .assessment-head strong { color: var(--signal); font-weight: 600; }
+  .assessment dl { margin: 0; }
+  .assessment dt { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--brass); margin-top: 0.6rem; }
+  .assessment dt:first-child { margin-top: 0; }
+  .assessment dd { margin: 0.2rem 0 0; font-size: 0.95rem; }
+  .assessment ul { margin: 0; padding-left: 1.1rem; }
+  .assessment li + li { margin-top: 0.3rem; }
 </style>
 </head>
 <body>
@@ -170,16 +179,16 @@
 
     <section aria-labelledby="example">
       <p class="eyebrow">A real session</p>
-      <h2 id="example">A winter farm: which subject leads?</h2>
+      <h2 id="example">Low tide: what is the photo about?</h2>
       <div class="pair">
         <figure>
-          <img src="images/farm-before.jpg" width="1600" height="1065" loading="lazy"
-               alt="First version: a black-and-white elevated view of snowy farmland with a farmhouse and trees at left, a lone bare tree in the centre-right, curving tracks, and a row of dark conifers clipped along the bottom edge.">
+          <img src="images/lowtide-before.jpg" width="1600" height="1066" loading="lazy"
+               alt="First version: a concrete causeway curves across wet tidal flats toward an island fortress under a pale sky; a lone walker in red is on the causeway near the fortress.">
           <figcaption>First version</figcaption>
         </figure>
         <figure>
-          <img src="images/farm-after.jpg" width="1600" height="945" loading="lazy"
-               alt="Final version: cropped from the top and bottom so the dark conifers along the lower edge are gone; the lone tree and its long shadow lead, the farmhouse is quieter, and the snow is brighter.">
+          <img src="images/lowtide-after.jpg" width="1600" height="900" loading="lazy"
+               alt="Final version: a wider, panoramic frame of the empty causeway and exposed seabed, with no walker or vehicle, the fortress slightly brighter at the end of the causeway.">
           <figcaption>Final version</figcaption>
         </figure>
       </div>
@@ -187,45 +196,50 @@
       <div class="dialogue">
         <div class="turn ai">
           <span class="who">Noemeo</span>
-          <div class="said"><p>The elevated view turns the snow-covered farmland into a subdued graphic study. Roads, tracks, fences, and field contours create layered diagonals and gentle curves, while the bare trees and small farmstead provide scale and a restrained human presence. Monochrome suits the winter austerity, and the long shadows add dimensionality and a quiet, isolated mood. Detail remains sufficiently legible throughout without undermining the atmospheric softness. The frame lacks a fully dominant point of interest: the farmstead, large foreground tree, and scattered upper trees compete at similar visual strength. The brightest, sparsest snowfield across the upper-right occupies substantial space without adding equivalent structure, and the dark conifers clipped along the bottom edge feel like an accidental border intrusion. Tonally, much of the snow sits in a narrow pale-gray range, which weakens separation among the field patterns and makes the composition feel flatter than the underlying forms warrant.</p></div>
+          <div class="said"><div class="assessment"><p class="assessment-head">Assessment · <strong>Competent</strong> · Preserved</p><dl><dt>Why it works</dt><dd>The curving causeway provides a strong lead-in through the exposed tidal flats and clearly directs the eye toward the island fortress. The lone walker adds scale, narrative, and a useful red accent within the restrained coastal palette. Broad depth of field preserves the foreground textures and distant architecture, while the soft light supports a quiet, exploratory mood.</dd><dt>What could be better</dt><dd>The destination sits small and dark beneath a large, relatively featureless sky, so the visual payoff is weaker than the forceful foreground lead-in promises. The expansive mudflat on the left and heavy pavement at the bottom make the framing feel somewhat loose, while the distant vehicle and scattered visitors dilute the solitary atmosphere. Tonally, the scene is slightly flat and cool.</dd><dt>Suggested edits</dt><dd><ul><li>Crop from the top, left, and slightly from the bottom to enlarge the fortress and walker while retaining the causeway’s curve as the dominant lead-in.</li><li>Apply selective contrast and modest dehazing to the fortress and midground, with a restrained warmer white balance, to improve separation without making the subdued coastal light look artificial.</li></ul></dd></dl></div></div>
         </div>
+        <p class="omitted">New version</p>
         <div class="turn me">
           <span class="who">Photographer</span>
-          <div class="said"><p>I would make the house the primary focus, and the lonely tree secondary.</p></div>
+          <div class="said"><p>Do you like this more?</p></div>
         </div>
         <div class="turn ai">
           <span class="who">Noemeo</span>
-          <div class="said"><p>That gives the frame a clearer hierarchy: the farmstead should anchor the scene, with one isolated tree acting as a secondary counterpoint. I’d guide attention locally rather than increasing contrast across the whole landscape. Brighten and add modest texture to the house and its adjoining trees, then give the lonely tree a smaller lift. Slightly suppress the bright, relatively empty upper-right snowfield and the dark conifers at the bottom edge so they stop competing. A restrained crop from the top and bottom could further concentrate the relationship without losing the sweeping field patterns.</p><div class="edit"><p class="edit-head">Suggested edit · Lightroom · excerpt, 2 of 5 adjustments</p><dl><dt>Masking – Radial Gradient</dt><dd>Place a broad, feathered mask over the house/farmstead; raise Exposure slightly and add modest Texture or Clarity so the structure separates from its dark surroundings.</dd><dt>Crop</dt><dd>Trim modestly from the top and bottom, especially the clipped dark conifers along the lower edge, while preserving the diagonal tracks and enough surrounding space to sustain the lonely mood.</dd></dl></div></div>
+          <div class="said"><p class="aside">Compared with the original: further from what you were going for</p><p>Compared with the original, the wider crop is a mixed change and ultimately moves the photograph further from what mattered. Cutting from the bottom reduces some of the heavy pavement, and the fortress appears slightly larger and more prominent. However, the crop also removes the lone walker—the clearest source of scale, narrative, and warm colour—so the causeway now feels empty and the vehicle becomes the most noticeable human-made accent. The sky and left mudflat still occupy substantial space, while the overall rendering has become cooler and more contrasty/saturated, especially in the blue sky; that gives the scene more punch but works against some of its earlier quiet, restrained atmosphere.</p></div>
         </div>
-        <p class="omitted">Some turns omitted</p>
         <div class="turn me">
           <span class="who">Photographer</span>
-          <div class="said"><p>In fact, I think that the tree should be primary to the house</p></div>
+          <div class="said"><p>The main point is the mood and emptiness, the sea bottom and the low tide</p></div>
         </div>
         <div class="turn ai">
           <span class="who">Noemeo</span>
-          <div class="said"><p>That changes the read in a useful way: the current edit already favors the tree through its larger scale, dark silhouette, and separation against the snow. The house then works as a quieter contextual anchor, giving the tree its sense of solitude and place. I would not brighten the house as previously suggested. Instead, keep it slightly subdued and make only a restrained local enhancement to the tree so its branches remain distinct without looking overprocessed.</p></div>
+          <div class="said"><p class="aside">Compared with the original: closer to what you were going for</p><p>That changes the read: removing the walker supports your intended emptiness rather than costing the image its narrative anchor. The wide crop also lets the exposed seabed spread laterally, so the low tide feels more expansive, while the causeway still carries the eye toward the island. On that basis, the current version is closer to your aim than the original. The remaining tension is the bright blue vehicle, which now becomes the strongest interruption to the emptiness, and the punchier blue/cyan rendering makes the scene feel crisper rather than especially hushed. I’d keep the framing, mute the vehicle locally, and slightly restrain the blues while preserving the seabed’s texture.</p></div>
         </div>
-        <p class="omitted">Some turns omitted</p>
+        <p class="omitted">New version</p>
         <div class="turn me">
           <span class="who">Photographer</span>
-          <div class="said"><p>Should I crop a little from the top?</p></div>
+          <div class="said"><p>I removed a vehicle, applied colour, texture and clarity changes as suggested</p></div>
         </div>
         <div class="turn ai">
           <span class="who">Noemeo</span>
-          <div class="said"><p>Yes—a small crop from the top would help. The clipped dark woodland pockets and scattered upper-edge forms attract attention without contributing much to the lonely-tree story. Trim only enough to remove most of those dark intrusions—roughly 3–5% of the frame height. Keep the small upper-field trees and ample pale snow above the tracks, so the scene retains breathing room. I would not crop aggressively: the vertical separation between the foreground tree and distant landscape is part of the feeling of solitude.</p><div class="edit"><p class="edit-head">Suggested edit · Lightroom · 1 adjustment</p><dl><dt>Crop</dt><dd>Bring the top edge down by about 3–5%, concentrating on the clipped dark woodland forms while preserving open snow above the central tracks.</dd></dl></div></div>
+          <div class="said"><p>The vehicle removal helps the intended emptiness: the causeway now reaches the island without that bright, boxy interruption. The colour treatment remains cool and coastal, and the added texture/clarity makes the exposed seabed read more distinctly as the subject. The trade-off is that the foreground stones and mud now feel a little hard and busy, while the blue sky is relatively vivid for a quiet, austere mood. I’d soften those global changes slightly rather than undo them.</p></div>
         </div>
-        <p class="omitted">Some turns omitted</p>
+        <p class="omitted">Some turns omitted · new version</p>
+        <div class="turn ai">
+          <span class="who">Noemeo</span>
+          <div class="said"><div class="assessment"><p class="assessment-head">Re-assessed · <strong>Strong</strong> · Preserved</p><dl><dt>Why it works</dt><dd>The exposed seabed dominates convincingly, giving the scene the intended sense of emptiness and tidal isolation. The causeway supplies a strong, gently curving lead toward the fortress, while the subdued gray-brown palette and broad, quiet sky reinforce a bleak coastal mood. Repeated pools, stones, and seaweed add texture without obscuring the destination.</dd><dt>What could be better</dt><dd>The fortress is a little small and tonally subdued relative to the visually heavy foreground, so the causeway’s promise ends at a destination that lacks emphasis. The broad sky and long slab of featureless concrete dilute the tension, while the tiny red buoys near both edges introduce unnecessary color accents. Overall contrast is slightly flat, particularly around the fortress.</dd><dt>Suggested edits</dt><dd><ul><li>Crop modestly from the top and bottom to reduce empty sky and the heaviest foreground concrete while preserving enough exposed seabed to sustain the low-tide story.</li><li>Darken or desaturate the edge buoys and apply restrained local contrast around the fortress and causeway terminus to strengthen the visual destination without breaking the muted mood.</li></ul></dd></dl></div></div>
+        </div>
+        <p class="omitted">Some turns omitted · new version</p>
         <div class="turn me">
           <span class="who">Photographer</span>
-          <div class="said"><p>I completely cropped out the bottom-edge distraction. Does this image look cleaner now?</p></div>
+          <div class="said"><p>Is it better? I lifted the fortress a little</p></div>
         </div>
         <div class="turn ai">
           <span class="who">Noemeo</span>
-          <div class="said"><p class="aside">Compared with the previous version: closer to what you were going for</p><p>Yes. The bottom-edge conifers are completely gone, and the lower boundary now consists only of the patterned snowfield. That makes the frame cleaner and prevents a dark, clipped foreground band from competing with the isolated tree and its shadow. The crop also feels intentional rather than cramped: there is still enough snow below the shadow and diagonal track to support the composition. Compared with the previous version, this is a helpful change; compared with the original, it substantially simplifies both the bottom and top boundaries. I would stop cropping here—the foreground tree is already fairly close to the lower-right edge, and any further reduction would begin to squeeze it.</p></div>
+          <div class="said"><p class="aside">Compared with the previous version: closer to what you were going for</p><p>Yes—lifting the fortress has moved it closer to what mattered. The causeway now resolves at a slightly clearer destination, but the fortress still feels distant and subdued enough to preserve the emptiness. I don’t see an unwanted overall colour or mood drift from the original; the larger change remains the panoramic crop and removal of people/vehicle. I’d stop here rather than brighten it further, which could make the fortress feel pasted onto the muted shoreline.</p></div>
         </div>
       </div>
-      <p class="fine">Excerpt from a real session, shared by the photographer. Noemeo’s replies are unedited; some turns are left out, and typos in the photographer’s messages are corrected.</p>
+      <p class="fine">Excerpt from a real session, shared by the photographer. Noemeo’s replies and assessments are unedited; some turns are left out.</p>
     </section>
 
     <section aria-labelledby="lightroom">
