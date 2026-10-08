@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Noemeo — edit with a creative peer</title>
-<meta name="description" content="Noemeo looks at your photo the way a fellow photographer would — what’s working, what’s holding it back, what you might try next — and talks it through with you, so post-processing becomes a conversation, not a chore. Works on its own or with Lightroom Classic. In closed beta.">
+<meta name="description" content="Noemeo looks at your photo the way a fellow photographer would — what’s working, what’s holding it back, what you might try next — and talks it through with you, so post-processing becomes a conversation, not a chore. A desktop app for macOS that suggests edits and never changes your photos. Works on its own or with Lightroom Classic. In closed beta.">
 <meta property="og:title" content="Noemeo — edit with a creative peer">
 <meta property="og:description" content="A creative peer for your edits: constructive feedback and a conversation about your photo. Your photos stay on your computer.">
 <meta property="og:type" content="website">
@@ -122,6 +122,15 @@
   .edit dt { font-weight: 600; font-size: 0.95rem; }
   .edit dd { margin: 0.15rem 0 0.6rem; color: var(--fog); font-size: 0.95rem; }
   .edit dd:last-child { margin-bottom: 0; }
+  .what { margin: 0 0 1.75rem; max-width: 36rem; font-size: 0.95rem; }
+  .shot { margin: 0 calc(50% - min(32rem, 50vw - 2rem)) 1rem; }
+  .shot img { border: 1px solid var(--line); border-radius: 8px; }
+  .shot figcaption { text-transform: none; letter-spacing: 0; font-family: inherit; font-size: 0.85rem; }
+  .tier-meaning { margin: -0.3rem 0 1.1rem; font-size: 0.85rem; font-style: italic; color: var(--fog); }
+  details.more { margin-top: 1.5rem; }
+  details.more summary { cursor: pointer; font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--signal); }
+  details.more[open] summary { margin-bottom: 1.25rem; }
+  ul.ask { margin: 0.5rem 0 1rem; padding-left: 1.2rem; }
   .omitted { margin: 0; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--fog); text-align: center; }
   .fine { margin: 1.5rem 0 0; font-size: 0.85rem; color: var(--fog); }
   .assessment { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 0.9rem 1rem; }
@@ -214,7 +223,16 @@
       <h1>Edit with a creative peer.</h1>
       <p class="lede">A second pair of eyes for your edits, and a way to learn why they work.</p>
       <p class="lede-more">Noemeo looks at your photo the way a fellow photographer would — what’s working, what’s holding it back, what you might try next — and talks it through with you. Post-processing becomes a conversation, not a chore.</p>
-      <a class="button" href="mailto:ilya@noemeo.com?subject=Noemeo%20beta%20access">Request beta access</a>
+      <p class="what"><strong>Noemeo Workspace is a desktop app for macOS</strong> (Windows support is planned). It reviews your photos and suggests edits; it never changes them. You make the edits yourself, in Lightroom Classic or whichever editor you use.</p>
+      <a class="button" href="#beta">Request beta access</a>
+    </div>
+
+    <div class="shot">
+      <figure>
+        <img src="images/workspace.jpg" width="1824" height="1274"
+             alt="Noemeo Workspace: on the left, the low-tide photo with its tier, Strong, and a note of what Noemeo knows about it: the photo is meant to emphasise mood, emptiness and the low tide. On the right, the conversation: the photographer asks whether lifting the fortress made it better, and Noemeo answers that it moved closer to what mattered and suggests stopping there.">
+        <figcaption>Noemeo Workspace, open on the session shown below. The photo and what Noemeo knows about it on the left, the conversation on the right.</figcaption>
+      </figure>
     </div>
 
     <section aria-labelledby="how">
@@ -264,17 +282,9 @@
       <div class="dialogue">
         <div class="turn ai">
           <span class="who">Noemeo</span>
-          <div class="said"><div class="assessment"><p class="assessment-head">Assessment · <strong>Competent</strong> · Preserved</p><dl><dt>Why it works</dt><dd>The curving causeway provides a strong lead-in through the exposed tidal flats and clearly directs the eye toward the island fortress. The lone walker adds scale, narrative, and a useful red accent within the restrained coastal palette. Broad depth of field preserves the foreground textures and distant architecture, while the soft light supports a quiet, exploratory mood.</dd><dt>What could be better</dt><dd>The destination sits small and dark beneath a large, relatively featureless sky, so the visual payoff is weaker than the forceful foreground lead-in promises. The expansive mudflat on the left and heavy pavement at the bottom make the framing feel somewhat loose, while the distant vehicle and scattered visitors dilute the solitary atmosphere. Tonally, the scene is slightly flat and cool.</dd><dt>Suggested edits</dt><dd><ul><li>Crop from the top, left, and slightly from the bottom to enlarge the fortress and walker while retaining the causeway’s curve as the dominant lead-in.</li><li>Apply selective contrast and modest dehazing to the fortress and midground, with a restrained warmer white balance, to improve separation without making the subdued coastal light look artificial.</li></ul></dd></dl></div></div>
+          <div class="said"><div class="assessment"><p class="assessment-head">Noemeo’s first read · <strong>Competent</strong></p><p class="tier-meaning">Competent and clearly intentional: it has a readable organizing idea and real merits, but remains limited, familiar, or incompletely resolved.</p><dl><dt>Why it works</dt><dd>The curving causeway provides a strong lead-in through the exposed tidal flats and clearly directs the eye toward the island fortress. The lone walker adds scale, narrative, and a useful red accent within the restrained coastal palette. Broad depth of field preserves the foreground textures and distant architecture, while the soft light supports a quiet, exploratory mood.</dd><dt>What could be better</dt><dd>The destination sits small and dark beneath a large, relatively featureless sky, so the visual payoff is weaker than the forceful foreground lead-in promises. The expansive mudflat on the left and heavy pavement at the bottom make the framing feel somewhat loose, while the distant vehicle and scattered visitors dilute the solitary atmosphere. Tonally, the scene is slightly flat and cool.</dd><dt>Suggested edits</dt><dd><ul><li>Crop from the top, left, and slightly from the bottom to enlarge the fortress and walker while retaining the causeway’s curve as the dominant lead-in.</li><li>Apply selective contrast and modest dehazing to the fortress and midground, with a restrained warmer white balance, to improve separation without making the subdued coastal light look artificial.</li></ul></dd></dl></div></div>
         </div>
-        <p class="omitted">New version</p>
-        <div class="turn me">
-          <span class="who">Photographer</span>
-          <div class="said"><p>Do you like this more?</p></div>
-        </div>
-        <div class="turn ai">
-          <span class="who">Noemeo</span>
-          <div class="said"><p class="aside">Compared with the original: further from what you were going for</p><p>Compared with the original, the wider crop is a mixed change and ultimately moves the photograph further from what mattered. Cutting from the bottom reduces some of the heavy pavement, and the fortress appears slightly larger and more prominent. However, the crop also removes the lone walker—the clearest source of scale, narrative, and warm colour—so the causeway now feels empty and the vehicle becomes the most noticeable human-made accent. The sky and left mudflat still occupy substantial space, while the overall rendering has become cooler and more contrasty/saturated, especially in the blue sky; that gives the scene more punch but works against some of its earlier quiet, restrained atmosphere.</p></div>
-        </div>
+        <p class="omitted">Left out: a new version and one exchange</p>
         <div class="turn me">
           <span class="who">Photographer</span>
           <div class="said"><p>The main point is the mood and emptiness, the sea bottom and the low tide</p></div>
@@ -283,21 +293,7 @@
           <span class="who">Noemeo</span>
           <div class="said"><p class="aside">Compared with the original: closer to what you were going for</p><p>That changes the read: removing the walker supports your intended emptiness rather than costing the image its narrative anchor. The wide crop also lets the exposed seabed spread laterally, so the low tide feels more expansive, while the causeway still carries the eye toward the island. On that basis, the current version is closer to your aim than the original. The remaining tension is the bright blue vehicle, which now becomes the strongest interruption to the emptiness, and the punchier blue/cyan rendering makes the scene feel crisper rather than especially hushed. I’d keep the framing, mute the vehicle locally, and slightly restrain the blues while preserving the seabed’s texture.</p></div>
         </div>
-        <p class="omitted">New version</p>
-        <div class="turn me">
-          <span class="who">Photographer</span>
-          <div class="said"><p>I removed a vehicle, applied colour, texture and clarity changes as suggested</p></div>
-        </div>
-        <div class="turn ai">
-          <span class="who">Noemeo</span>
-          <div class="said"><p>The vehicle removal helps the intended emptiness: the causeway now reaches the island without that bright, boxy interruption. The colour treatment remains cool and coastal, and the added texture/clarity makes the exposed seabed read more distinctly as the subject. The trade-off is that the foreground stones and mud now feel a little hard and busy, while the blue sky is relatively vivid for a quiet, austere mood. I’d soften those global changes slightly rather than undo them.</p></div>
-        </div>
-        <p class="omitted">Some turns omitted · new version</p>
-        <div class="turn ai">
-          <span class="who">Noemeo</span>
-          <div class="said"><div class="assessment"><p class="assessment-head">Re-assessed · <strong>Strong</strong> · Preserved</p><dl><dt>Why it works</dt><dd>The exposed seabed dominates convincingly, giving the scene the intended sense of emptiness and tidal isolation. The causeway supplies a strong, gently curving lead toward the fortress, while the subdued gray-brown palette and broad, quiet sky reinforce a bleak coastal mood. Repeated pools, stones, and seaweed add texture without obscuring the destination.</dd><dt>What could be better</dt><dd>The fortress is a little small and tonally subdued relative to the visually heavy foreground, so the causeway’s promise ends at a destination that lacks emphasis. The broad sky and long slab of featureless concrete dilute the tension, while the tiny red buoys near both edges introduce unnecessary color accents. Overall contrast is slightly flat, particularly around the fortress.</dd><dt>Suggested edits</dt><dd><ul><li>Crop modestly from the top and bottom to reduce empty sky and the heaviest foreground concrete while preserving enough exposed seabed to sustain the low-tide story.</li><li>Darken or desaturate the edge buoys and apply restrained local contrast around the fortress and causeway terminus to strengthen the visual destination without breaking the muted mood.</li></ul></dd></dl></div></div>
-        </div>
-        <p class="omitted">Some turns omitted · new version</p>
+        <p class="omitted">Left out: three new versions and several turns</p>
         <div class="turn me">
           <span class="who">Photographer</span>
           <div class="said"><p>Is it better? I lifted the fortress a little</p></div>
@@ -307,7 +303,56 @@
           <div class="said"><p class="aside">Compared with the previous version: closer to what you were going for</p><p>Yes—lifting the fortress has moved it closer to what mattered. The causeway now resolves at a slightly clearer destination, but the fortress still feels distant and subdued enough to preserve the emptiness. I don’t see an unwanted overall colour or mood drift from the original; the larger change remains the panoramic crop and removal of people/vehicle. I’d stop here rather than brighten it further, which could make the fortress feel pasted onto the muted shoreline.</p></div>
         </div>
       </div>
-      <p class="fine">Excerpt from a real session, shared by the photographer. Noemeo’s replies and assessments are unedited; some turns are left out.</p>
+      <details class="more">
+        <summary>Show the longer excerpt</summary>
+        <div class="dialogue">
+          <div class="turn ai">
+            <span class="who">Noemeo</span>
+            <div class="said"><div class="assessment"><p class="assessment-head">Noemeo’s first read · <strong>Competent</strong></p><p class="tier-meaning">Competent and clearly intentional: it has a readable organizing idea and real merits, but remains limited, familiar, or incompletely resolved.</p><dl><dt>Why it works</dt><dd>The curving causeway provides a strong lead-in through the exposed tidal flats and clearly directs the eye toward the island fortress. The lone walker adds scale, narrative, and a useful red accent within the restrained coastal palette. Broad depth of field preserves the foreground textures and distant architecture, while the soft light supports a quiet, exploratory mood.</dd><dt>What could be better</dt><dd>The destination sits small and dark beneath a large, relatively featureless sky, so the visual payoff is weaker than the forceful foreground lead-in promises. The expansive mudflat on the left and heavy pavement at the bottom make the framing feel somewhat loose, while the distant vehicle and scattered visitors dilute the solitary atmosphere. Tonally, the scene is slightly flat and cool.</dd><dt>Suggested edits</dt><dd><ul><li>Crop from the top, left, and slightly from the bottom to enlarge the fortress and walker while retaining the causeway’s curve as the dominant lead-in.</li><li>Apply selective contrast and modest dehazing to the fortress and midground, with a restrained warmer white balance, to improve separation without making the subdued coastal light look artificial.</li></ul></dd></dl></div></div>
+          </div>
+          <p class="omitted">New version</p>
+          <div class="turn me">
+            <span class="who">Photographer</span>
+            <div class="said"><p>Do you like this more?</p></div>
+          </div>
+          <div class="turn ai">
+            <span class="who">Noemeo</span>
+            <div class="said"><p class="aside">Compared with the original: further from what you were going for</p><p>Compared with the original, the wider crop is a mixed change and ultimately moves the photograph further from what mattered. Cutting from the bottom reduces some of the heavy pavement, and the fortress appears slightly larger and more prominent. However, the crop also removes the lone walker—the clearest source of scale, narrative, and warm colour—so the causeway now feels empty and the vehicle becomes the most noticeable human-made accent. The sky and left mudflat still occupy substantial space, while the overall rendering has become cooler and more contrasty/saturated, especially in the blue sky; that gives the scene more punch but works against some of its earlier quiet, restrained atmosphere.</p></div>
+          </div>
+          <div class="turn me">
+            <span class="who">Photographer</span>
+            <div class="said"><p>The main point is the mood and emptiness, the sea bottom and the low tide</p></div>
+          </div>
+          <div class="turn ai">
+            <span class="who">Noemeo</span>
+            <div class="said"><p class="aside">Compared with the original: closer to what you were going for</p><p>That changes the read: removing the walker supports your intended emptiness rather than costing the image its narrative anchor. The wide crop also lets the exposed seabed spread laterally, so the low tide feels more expansive, while the causeway still carries the eye toward the island. On that basis, the current version is closer to your aim than the original. The remaining tension is the bright blue vehicle, which now becomes the strongest interruption to the emptiness, and the punchier blue/cyan rendering makes the scene feel crisper rather than especially hushed. I’d keep the framing, mute the vehicle locally, and slightly restrain the blues while preserving the seabed’s texture.</p></div>
+          </div>
+          <p class="omitted">New version</p>
+          <div class="turn me">
+            <span class="who">Photographer</span>
+            <div class="said"><p>I removed a vehicle, applied colour, texture and clarity changes as suggested</p></div>
+          </div>
+          <div class="turn ai">
+            <span class="who">Noemeo</span>
+            <div class="said"><p>The vehicle removal helps the intended emptiness: the causeway now reaches the island without that bright, boxy interruption. The colour treatment remains cool and coastal, and the added texture/clarity makes the exposed seabed read more distinctly as the subject. The trade-off is that the foreground stones and mud now feel a little hard and busy, while the blue sky is relatively vivid for a quiet, austere mood. I’d soften those global changes slightly rather than undo them.</p></div>
+          </div>
+          <p class="omitted">Some turns omitted · new version</p>
+          <div class="turn ai">
+            <span class="who">Noemeo</span>
+            <div class="said"><div class="assessment"><p class="assessment-head">Noemeo’s read, with your story · <strong>Strong</strong></p><p class="tier-meaning">Strong: coherent, engaging, and substantially resolved, with qualities that sustain attention beyond competent execution.</p><dl><dt>Why it works</dt><dd>The exposed seabed dominates convincingly, giving the scene the intended sense of emptiness and tidal isolation. The causeway supplies a strong, gently curving lead toward the fortress, while the subdued gray-brown palette and broad, quiet sky reinforce a bleak coastal mood. Repeated pools, stones, and seaweed add texture without obscuring the destination.</dd><dt>What could be better</dt><dd>The fortress is a little small and tonally subdued relative to the visually heavy foreground, so the causeway’s promise ends at a destination that lacks emphasis. The broad sky and long slab of featureless concrete dilute the tension, while the tiny red buoys near both edges introduce unnecessary color accents. Overall contrast is slightly flat, particularly around the fortress.</dd><dt>Suggested edits</dt><dd><ul><li>Crop modestly from the top and bottom to reduce empty sky and the heaviest foreground concrete while preserving enough exposed seabed to sustain the low-tide story.</li><li>Darken or desaturate the edge buoys and apply restrained local contrast around the fortress and causeway terminus to strengthen the visual destination without breaking the muted mood.</li></ul></dd></dl></div></div>
+          </div>
+          <p class="omitted">Some turns omitted · new version</p>
+          <div class="turn me">
+            <span class="who">Photographer</span>
+            <div class="said"><p>Is it better? I lifted the fortress a little</p></div>
+          </div>
+          <div class="turn ai">
+            <span class="who">Noemeo</span>
+            <div class="said"><p class="aside">Compared with the previous version: closer to what you were going for</p><p>Yes—lifting the fortress has moved it closer to what mattered. The causeway now resolves at a slightly clearer destination, but the fortress still feels distant and subdued enough to preserve the emptiness. I don’t see an unwanted overall colour or mood drift from the original; the larger change remains the panoramic crop and removal of people/vehicle. I’d stop here rather than brighten it further, which could make the fortress feel pasted onto the muted shoreline.</p></div>
+          </div>
+        </div>
+      </details>
+      <p class="fine">From a real session, shared by the photographer. Noemeo’s replies and assessments are unedited; some turns are left out of both views.</p>
     </section>
 
     <section aria-labelledby="compare">
@@ -364,17 +409,24 @@
 
     <section aria-labelledby="privacy">
       <p class="eyebrow">Privacy</p>
-      <h2 id="privacy">Your photos stay on your computer</h2>
+      <h2 id="privacy">Your photos are stored only on your computer</h2>
       <div class="note">
         <p>Your photos, conversations and everything Noemeo learns about them are kept on your own computer — not in Noemeo's cloud.</p>
-        <p>To give feedback, Noemeo sends only the photo and text needed for that one review to an AI model, through Amazon Web Services. It is processed for that request and not stored. Noemeo's cloud keeps only what an account needs: your sign-in, the names of the computers you use Noemeo on, and how much of your allowance you've used.</p>
+        <p>Reviewing a photo does mean sending it out: for each review, Noemeo sends that photo and the text it needs to an AI model, through Amazon Web Services. It is processed for that request and not stored. Noemeo's cloud keeps only what an account needs: your sign-in, the names of the computers you use Noemeo on, and how much of your allowance you've used.</p>
       </div>
     </section>
 
     <section aria-labelledby="beta">
       <p class="eyebrow">Availability</p>
       <h2 id="beta">Noemeo is in closed beta</h2>
-      <p>We're opening access to a small group of photographers first. If you'd like to try it, write to <a href="mailto:ilya@noemeo.com?subject=Noemeo%20beta%20access">ilya@noemeo.com</a> and tell us a little about how you work.</p>
+      <p>The beta is free, covers reviews of 20 photos, and is open to a limited number of photographers. Noemeo Workspace runs on macOS for now; Windows support is planned.</p>
+      <p>To join, write to <a href="mailto:ilya@noemeo.com?subject=Noemeo%20beta%20access">ilya@noemeo.com</a> and tell us:</p>
+      <ul class="ask">
+        <li>which editor you use (Lightroom Classic or another),</li>
+        <li>what kind of photography you do,</li>
+        <li>what you'd most like a second opinion on.</li>
+      </ul>
+      <p>If there's a place, we'll send you a download link for the Mac app and a key to activate it.</p>
     </section>
   </main>
 
@@ -419,7 +471,7 @@
       prev.hidden = next.hidden = group.length < 2;
     }
 
-    document.querySelectorAll('.pair').forEach(function (pair) {
+    document.querySelectorAll('.pair, .shot').forEach(function (pair) {
       var items = [];
       pair.querySelectorAll('figure').forEach(function (figure, i) {
         var img = figure.querySelector('img');
