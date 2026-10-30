@@ -144,8 +144,9 @@
   .assessment dd { margin: 0.2rem 0 0; font-size: 0.95rem; }
   .assessment ul { margin: 0; padding-left: 1.1rem; }
   .assessment li + li { margin-top: 0.3rem; }
-  /* The whole photo across the top, two details side by side below it;
-     each is its own lightbox group, so the details flip between themselves. */
+  /* The whole photo across the top, the details two to a row below it
+     (also on phones, so versions stay side by side); each is its own
+     lightbox group, so the details flip between themselves. */
   .pair.whole { grid-template-columns: 1fr; margin-bottom: 1rem; }
   .pair.versions { grid-template-columns: 1fr 1fr; }
   .frame { position: relative; display: block; }
@@ -155,6 +156,15 @@
     border: 2px solid #fbf9f4; border-radius: 0 3px 0 6px;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.45); pointer-events: none;
   }
+  /* Over bright windows the white line needs a dark one inside it too. */
+  .detail-mark.cordoba {
+    left: 28.03%; top: 55.98%; width: 43.95%; height: 44.02%; border-radius: 3px 3px 6px 6px;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.45), inset 0 0 0 1px rgba(0, 0, 0, 0.35);
+  }
+  figcaption strong { color: var(--signal); font-weight: 600; }
+  .pull { margin: 0 0 1.25rem; padding: 0.25rem 0 0.25rem 1rem; border-left: 3px solid var(--signal); max-width: 46rem; font-size: 1.1rem; }
+  .pull p { margin: 0 0 0.4rem; }
+  .pull footer { border: 0; padding: 0; font-family: var(--mono); font-size: 0.78rem; color: var(--fog); }
   .photo-note { margin: -1rem 0 1.75rem; font-size: 0.85rem; color: var(--fog); }
   section > p.lede-section { margin: -0.5rem 0 1.75rem; color: var(--fog); }
   .diffs { margin: 0; padding-left: 1.1rem; font-size: 0.95rem; }
@@ -165,7 +175,6 @@
     .hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 3rem; align-items: center; }
     .hero .shot { margin: 0; }
     .demo { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 2.5rem; align-items: start; }
-    .demo-photos { position: sticky; top: 1.25rem; }
     .demo .pair { grid-template-columns: 1fr; gap: 1rem; margin: 0; }
     .demo .pair.whole { margin-bottom: 1rem; }
     .demo .pair.versions { grid-template-columns: 1fr 1fr; }
@@ -174,6 +183,11 @@
     .duo { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; border-top: 1px solid var(--line); }
     .duo > section { border-top: 0; }
     section > ol.steps { max-width: none; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+  }
+  /* The photos follow the dialogue only where the whole column fits on
+     screen; on a short laptop screen it would hide its lower details. */
+  @media (min-width: 960px) and (min-height: 760px) {
+    .demo-photos { position: sticky; top: 1.25rem; }
   }
   /* ---------- enlarge photos (lightbox) ---------- */
   .zoom {
@@ -262,7 +276,7 @@
         <figure>
           <img src="images/workspace.jpg" width="1408" height="1265"
                alt="Noemeo Workspace: on the left, the photo of Perugia with its tier, Strong, and a note of what Noemeo knows about it: the photo is meant to emphasise perspective through the town’s layered depth. On the right, the conversation: an edit to try in Lightroom’s Develop module, with masking, Texture, Clarity and Shadows steps, why, and what it might cost; then the photographer asks “Better?” and Noemeo answers that the new version is closer to what they were going for.">
-          <figcaption>Noemeo Workspace, open on the session below.</figcaption>
+          <figcaption>Noemeo Workspace, open on the Perugia session below.</figcaption>
         </figure>
       </div>
     </div>
@@ -294,6 +308,119 @@
           </div>
         </li>
       </ol>
+    </section>
+
+    <section aria-labelledby="cordoba">
+      <p class="eyebrow">A real session</p>
+      <h2 id="cordoba">Córdoba: better, or too much?</h2>
+      <p class="lede-section">Noemeo’s first read pointed out what the photographer hadn’t noticed: the bright windows at the bottom pull the eye away from the dome. The photographer darkened them and asked, “Is it better, or is it too much?” Noemeo measured the change and found the mask had reached beyond the windows:</p>
+      <blockquote class="pull">
+        <p>“The lower central vault is about 15 L* darker, substantially cooler, and less saturated, turning the original warm continuation into a grey, relatively detached section.”</p>
+        <footer>From Noemeo’s answer; the whole reply is below</footer>
+      </blockquote>
+      <p class="lede-section">The photographer called it an accident and made two more edits.</p>
+      <div class="demo">
+        <div class="demo-photos">
+          <div class="pair whole">
+            <figure>
+              <span class="frame">
+                <img src="images/cordoba-final.jpg" width="1600" height="1065" loading="lazy"
+                     alt="Final version: looking straight up into the vaults of Córdoba’s cathedral, with gilded ribbed vaults at left, a pale carved dome at the centre, dark organ pipes at right and arched windows glowing along the bottom edge.">
+                <span class="detail-mark cordoba" aria-hidden="true"></span>
+              </span>
+              <figcaption>Final version</figcaption>
+            </figure>
+          </div>
+          <div class="pair versions">
+            <figure>
+              <img src="images/cordoba-original-windows.jpg" width="630" height="420" loading="lazy"
+                   alt="Detail of the original: the lower vault in warm, pale gold light above a row of bright arched windows.">
+              <figcaption>Original</figcaption>
+            </figure>
+            <figure>
+              <img src="images/cordoba-edit1-windows.jpg" width="630" height="420" loading="lazy"
+                   alt="The same detail after the first edit: the windows dimmer, and the lower vault darker, cooler and nearly grey.">
+              <figcaption><strong>First edit:</strong> vault greyer</figcaption>
+            </figure>
+            <figure>
+              <img src="images/cordoba-edit2-windows.jpg" width="630" height="420" loading="lazy"
+                   alt="The same detail after the second edit: the colour restored and the vault brighter and warmer again, close to the original.">
+              <figcaption>Second edit</figcaption>
+            </figure>
+            <figure>
+              <img src="images/cordoba-final-windows.jpg" width="630" height="420" loading="lazy"
+                   alt="The same detail in the final version: the vault a warmer gold, the windows still restrained.">
+              <figcaption>Third edit (final)</figcaption>
+            </figure>
+          </div>
+          <p class="photo-note">The outline marks where the details come from. Enlarge a detail and flip through the four versions.</p>
+        </div>
+        <div class="demo-talk">
+
+          <div class="dialogue">
+            <div class="turn ai">
+              <span class="who">Noemeo</span>
+              <div class="said"><div class="assessment"><p class="assessment-head">Noemeo’s first read · <strong>Strong</strong></p><p class="tier-meaning">Strong: coherent, engaging, and substantially resolved, with qualities that sustain attention beyond competent execution.</p><dl><dt>What works</dt><dd>The upward viewpoint turns the intersecting vaults into an enveloping architectural experience, with sweeping ribs carrying the eye toward the central dome. Warm gold on the left, pale stone through the center, and dark organ pipes on the right give the intricate ornament a readable hierarchy. Detail remains clear enough to reward exploration without losing the larger sensation of grandeur.</dd><dt>What holds it back</dt><dd>The bright windows along the bottom edge pull attention away from the central vault, slightly weakening its role as the visual destination. Otherwise, the main limitation is interpretive rather than technical: the photograph conveys the building’s magnificence convincingly, but offers less of a distinctive emotional perspective beyond awe at its ornament and scale.</dd><dt>Leave as it is</dt><dd><ul><li>Keep the pronounced convergence of the columns and arches: it expresses the sensation of looking overhead and makes the architecture feel enveloping.</li><li>Keep the contrast between the warmer left-hand vault and the cooler central stonework, which separates the architectural spaces and prevents the ornament from becoming visually uniform.</li></ul></dd><dt>Edits to try</dt><dd><ul><li>Gently reduce the brightness of the bottom-edge windows and their immediate surrounds to keep attention circulating around the central dome; this would slightly reduce the sense of daylight flooding the interior, so avoid making the windows gray.</li></ul></dd></dl></div></div>
+            </div>
+            <p class="omitted">New version</p>
+            <div class="turn me">
+              <span class="who">Photographer</span>
+              <div class="said"><p>Reduced bottom brightness. Is it better, or is it too much?</p></div>
+            </div>
+            <div class="turn ai">
+              <span class="who">Noemeo</span>
+              <div class="said"><p class="aside">Compared with the version you started with: further from what you were going for.</p><p>The reduction is clearly present, and the current version handles the bright bottom windows better: they no longer pull as insistently from the central dome, so the tonal change itself moves the image closer to the assessment’s concern. It is not too dark in a clipping or blocked-shadow sense.</p><p>But the adjustment reaches too far beyond brightness. The lower central vault is about 15 L* darker, substantially cooler, and less saturated, turning the original warm continuation into a grey, relatively detached section. That weakens the warm-left/cool-center relationship and the sense of light carrying through the architecture. The extra local contrast near the bottom also makes that area busier, while the section immediately above has become slightly softer.</p><p>I’d keep some reduction at the windows, but restore much of the warmth and brightness in the surrounding vault. In short: the aim helped; the present mask is too broad and too chromatically heavy.</p></div>
+            </div>
+            <p class="omitted">Left out: a new version and one exchange</p>
+            <p class="omitted">New version</p>
+            <div class="turn me">
+              <span class="who">Photographer</span>
+              <div class="said"><p>Do you like it more? I slightly raised the temperature of the mask</p></div>
+            </div>
+            <div class="turn ai">
+              <span class="who">Noemeo</span>
+              <div class="said"><p class="aside">Compared with your previous version: closer to what you were going for.</p><p>Yes—more than the previous version. The slight temperature increase restores a natural golden continuity in the lower vault, so it no longer feels grey or detached, while the windows remain sufficiently restrained. The warmer area is noticeable, but it now relates to the warmth on the left rather than reading as an isolated colour patch.</p><p>It also improves on the original overall: the lower windows pull less strongly, and the central dome remains the clearer destination. There has been no troublesome global colour drift; the change is concentrated low in the frame. I’d stop here—the remaining brightness at the bottom helps explain the illumination and depth rather than competing with the dome.</p></div>
+            </div>
+          </div>
+          <details class="more">
+            <summary>Show the whole conversation</summary>
+            <div class="dialogue">
+              <div class="turn ai">
+                <span class="who">Noemeo</span>
+                <div class="said"><div class="assessment"><p class="assessment-head">Noemeo’s first read · <strong>Strong</strong></p><p class="tier-meaning">Strong: coherent, engaging, and substantially resolved, with qualities that sustain attention beyond competent execution.</p><dl><dt>What works</dt><dd>The upward viewpoint turns the intersecting vaults into an enveloping architectural experience, with sweeping ribs carrying the eye toward the central dome. Warm gold on the left, pale stone through the center, and dark organ pipes on the right give the intricate ornament a readable hierarchy. Detail remains clear enough to reward exploration without losing the larger sensation of grandeur.</dd><dt>What holds it back</dt><dd>The bright windows along the bottom edge pull attention away from the central vault, slightly weakening its role as the visual destination. Otherwise, the main limitation is interpretive rather than technical: the photograph conveys the building’s magnificence convincingly, but offers less of a distinctive emotional perspective beyond awe at its ornament and scale.</dd><dt>Leave as it is</dt><dd><ul><li>Keep the pronounced convergence of the columns and arches: it expresses the sensation of looking overhead and makes the architecture feel enveloping.</li><li>Keep the contrast between the warmer left-hand vault and the cooler central stonework, which separates the architectural spaces and prevents the ornament from becoming visually uniform.</li></ul></dd><dt>Edits to try</dt><dd><ul><li>Gently reduce the brightness of the bottom-edge windows and their immediate surrounds to keep attention circulating around the central dome; this would slightly reduce the sense of daylight flooding the interior, so avoid making the windows gray.</li></ul></dd></dl></div></div>
+              </div>
+              <p class="omitted">New version</p>
+              <div class="turn me">
+                <span class="who">Photographer</span>
+                <div class="said"><p>Reduced bottom brightness. Is it better, or is it too much?</p></div>
+              </div>
+              <div class="turn ai">
+                <span class="who">Noemeo</span>
+                <div class="said"><p class="aside">Compared with the version you started with: further from what you were going for.</p><p>The reduction is clearly present, and the current version handles the bright bottom windows better: they no longer pull as insistently from the central dome, so the tonal change itself moves the image closer to the assessment’s concern. It is not too dark in a clipping or blocked-shadow sense.</p><p>But the adjustment reaches too far beyond brightness. The lower central vault is about 15 L* darker, substantially cooler, and less saturated, turning the original warm continuation into a grey, relatively detached section. That weakens the warm-left/cool-center relationship and the sense of light carrying through the architecture. The extra local contrast near the bottom also makes that area busier, while the section immediately above has become slightly softer.</p><p>I’d keep some reduction at the windows, but restore much of the warmth and brightness in the surrounding vault. In short: the aim helped; the present mask is too broad and too chromatically heavy.</p></div>
+              </div>
+              <p class="omitted">New version</p>
+              <div class="turn me">
+                <span class="who">Photographer</span>
+                <div class="said"><p>Is it better? The previous mask accidentally severely reduced saturation. I restored saturation and confined the mask area to the windows and made it softer</p></div>
+              </div>
+              <div class="turn ai">
+                <span class="who">Noemeo</span>
+                <div class="said"><p class="aside">Compared with your previous version: further from what you were going for.</p><p>Your correction is visible: saturation and warmth have returned around the lower vault, and the transition is softer. Compared with the immediately previous version, though, it goes a little too far—the mask now brightens and warms much of the lower-centre vault, not only the windows. That golden patch competes more with the central dome and feels less integrated with the cooler stone around it.</p><p>Against the original, it is still better overall: the bottom windows exert less pull, while the architecture retains more colour than in the desaturated intermediate version. So the restoration fixed the main accident, but I’d split the difference: keep the restored saturation, and reduce the mask’s warmth and brightness over the vault while preserving the stronger reduction directly on the window panes.</p></div>
+              </div>
+              <p class="omitted">New version</p>
+              <div class="turn me">
+                <span class="who">Photographer</span>
+                <div class="said"><p>Do you like it more? I slightly raised the temperature of the mask</p></div>
+              </div>
+              <div class="turn ai">
+                <span class="who">Noemeo</span>
+                <div class="said"><p class="aside">Compared with your previous version: closer to what you were going for.</p><p>Yes—more than the previous version. The slight temperature increase restores a natural golden continuity in the lower vault, so it no longer feels grey or detached, while the windows remain sufficiently restrained. The warmer area is noticeable, but it now relates to the warmth on the left rather than reading as an isolated colour patch.</p><p>It also improves on the original overall: the lower windows pull less strongly, and the central dome remains the clearer destination. There has been no troublesome global colour drift; the change is concentrated low in the frame. I’d stop here—the remaining brightness at the bottom helps explain the illumination and depth rather than competing with the dome.</p></div>
+              </div>
+            </div>
+          </details>
+          <p class="fine">From a real session, shared by the photographer, who made every edit. Noemeo’s replies and assessment are unedited. The short view leaves one exchange out; the whole conversation shows every turn up to the final edit, without the step-by-step Lightroom suggestions Noemeo attached to two replies.</p>
+        </div>
+      </div>
     </section>
 
     <section aria-labelledby="example">
