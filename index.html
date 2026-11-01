@@ -3,37 +3,32 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Noemeo — edit with a creative peer</title>
-<meta name="description" content="Noemeo looks at your photo the way a fellow photographer would — what’s working, what’s holding it back, what you might try next — and talks it through with you, so post-processing becomes a conversation, not a chore. A desktop app for macOS that suggests edits and never changes your photos. Works on its own or with Lightroom Classic. In closed beta.">
-<meta property="og:title" content="Noemeo — edit with a creative peer">
-<meta property="og:description" content="A creative peer for your edits: constructive feedback and a conversation about your photo. Your photos stay on your computer.">
+<title>Noemeo — a second pair of eyes for your edits</title>
+<meta name="description" content="Noemeo reviews your photo, talks it through with you, and tells you whether each new version gets closer to what you were going for. You make every edit. A Mac app that works with any editor. In closed beta.">
+<meta property="og:title" content="Noemeo — a second pair of eyes for your edits">
+<meta property="og:description" content="Noemeo reviews your photo and tells you whether each new version gets closer to what you were going for. You make every edit.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://noemeo.com/">
+<meta property="og:image" content="https://noemeo.com/images/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Looking up into the vaults of Córdoba’s cathedral.">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://noemeo.com/">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231d1e20'/%3E%3Ccircle cx='16' cy='16' r='7' fill='none' stroke='%23d9614c' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%232a2a2a'/%3E%3Cellipse cx='16' cy='16' rx='9' ry='7' fill='none' stroke='%23ffd23f' stroke-width='3'/%3E%3C/svg%3E">
 <style>
   :root {
-    color-scheme: light dark;
-    --paper: #f2eee6;
-    --card: #fbf9f4;
-    --line: #ddd6c8;
-    --ink: #1d1e20;
-    --fog: #5f5a52;
-    --signal: #a63626;
-    --brass: #7a5c1c;
-    --serif: Georgia, 'Iowan Old Style', 'Times New Roman', serif;
-    --mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --paper: #17181a;
-      --card: #202124;
-      --line: #35363a;
-      --ink: #ede9e1;
-      --fog: #a8a295;
-      --signal: #e07a66;
-      --brass: #c79a44;
-    }
+    color-scheme: light;
+    --paper: #ededed;
+    --viewer: #2a2a2a;
+    --ink: #1a1a1a;
+    --ink-soft: #5c5c5c;
+    --on-viewer: #f0f0f0;
+    --on-viewer-soft: #b5b5b5;
+    --mark: #ffd23f;
+    --line: #d0d0d0;
+    --sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --serif: 'Iowan Old Style', Georgia, serif;
   }
   * { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; }
@@ -41,349 +36,251 @@
     margin: 0;
     background: var(--paper);
     color: var(--ink);
-    font-family: var(--serif);
-    font-size: 1.0625rem;
-    line-height: 1.6;
+    font: 17px/1.6 var(--sans);
   }
-  a { color: var(--signal); text-underline-offset: 0.18em; }
-  a:focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; border-radius: 2px; }
-  .wrap { max-width: 68rem; margin: 0 auto; padding: 0 1.25rem; }
-  /* Prose keeps a comfortable line length on the wider page. */
-  section > p, section > ul, section > .note, section > ol.steps, .demo-talk .fine { max-width: 46rem; }
+  img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
+  a { color: inherit; text-underline-offset: 0.18em; }
+  :focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 1rem; }
+  @media (min-width: 720px) { .wrap { padding: 0 2rem; } }
+  h1, h2, h3 { font-weight: 600; letter-spacing: -0.01em; margin: 0; }
+  h1 { font-size: 2.15rem; line-height: 1.1; }
+  h2 { font-size: 1.65rem; line-height: 1.2; margin-bottom: 0.75rem; }
+  h3 { font-size: 1.05rem; }
+  @media (min-width: 720px) { h1 { font-size: 3rem; line-height: 1.08; } }
+  p { margin: 0 0 1rem; max-width: 64ch; }
 
-  header.top { border-bottom: 1px solid var(--line); }
-  header.top .wrap { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; padding-top: 1.1rem; padding-bottom: 1.1rem; }
-  .wordmark { font-family: var(--mono); font-weight: 600; letter-spacing: 0.08em; font-size: 1rem; }
-  .eyebrow {
-    font-family: var(--mono);
-    text-transform: uppercase;
-    letter-spacing: 0.09em;
-    font-size: 0.72rem;
-    color: var(--brass);
-  }
+  /* Noemeo's own words: serif, behind the mark-coloured rule on dark
+     surfaces and an ink rule on paper. Everything else is sans. */
+  .noemeo { font-family: var(--serif); font-size: 1.12rem; line-height: 1.6; margin: 0; }
+  blockquote.noemeo { border-left: 3px solid var(--ink); padding-left: 1rem; }
+  .viewer blockquote.noemeo, .mat blockquote.noemeo { border-left-color: var(--mark); }
+  .verdict-line { font-family: var(--serif); font-weight: 600; margin: 0 0 0.5rem; }
+  .said-by { font-size: 0.85rem; color: var(--ink-soft); display: block; margin-bottom: 0.15rem; }
+  .viewer .said-by, .mat .said-by { color: var(--on-viewer-soft); }
 
-  .hero { padding: 4.5rem 0 3rem; }
-  .hero h1 {
-    font-weight: 400;
-    font-size: clamp(2rem, 6vw, 3rem);
-    line-height: 1.15;
-    margin: 0.6rem 0 1.2rem;
-    letter-spacing: -0.01em;
-  }
-  .hero p.lede { font-size: 1.2rem; color: var(--fog); margin: 0 0 1.75rem; max-width: 36rem; }
-  .hero .eyebrow { margin: 0; }
-  .hero p.lede { margin-bottom: 0.9rem; }
-  .hero p.lede-more { color: var(--fog); margin: 0 0 1.75rem; max-width: 36rem; }
+  .top { padding: 1rem 0; }
+  .top .wrap { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+  .wordmark { font-weight: 700; font-size: 1.1rem; letter-spacing: 0.01em; }
+  .top a { font-size: 0.95rem; padding: 0.6rem 0; }
+
+  .viewer { background: var(--viewer); color: var(--on-viewer); }
+  .viewer :focus-visible, .mat :focus-visible { outline-color: var(--on-viewer); }
   .button {
     display: inline-block;
-    font-family: var(--mono);
-    font-size: 0.8rem;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
+    min-height: 44px;
+    padding: 0.7rem 1.3rem;
+    border-radius: 4px;
+    background: var(--ink);
+    color: var(--paper);
+    font-weight: 600;
     text-decoration: none;
-    color: #fbf3ee;
-    background: #a63626;
-    padding: 0.8rem 1.15rem;
-    border-radius: 6px;
   }
-  .button:hover { opacity: 0.9; }
+  .viewer .button { background: var(--on-viewer); color: var(--viewer); }
+  .button small { display: block; font-weight: 400; font-size: 0.8rem; }
 
-  section { padding: 2.5rem 0; border-top: 1px solid var(--line); }
-  section h2 { font-weight: 400; font-size: 1.55rem; margin: 0.4rem 0 1.25rem; }
-  .steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.25rem; }
-  .steps li { display: grid; grid-template-columns: 2.25rem 1fr; gap: 0.75rem; }
-  .steps .n { font-family: var(--mono); color: var(--signal); font-size: 0.9rem; padding-top: 0.2rem; }
-  .steps h3 { margin: 0 0 0.2rem; font-size: 1.1rem; font-weight: 600; }
-  .steps p { margin: 0; color: var(--fog); }
-  ul.plain { margin: 0; padding-left: 1.2rem; }
-  ul.plain li + li { margin-top: 0.5rem; }
-  .note { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 1.25rem 1.4rem; }
-  .note p { margin: 0; }
-  .note p + p { margin-top: 0.75rem; }
+  /* ---------- hero ---------- */
+  .hero { padding: 2.5rem 0 3rem; }
+  .hero h1 { max-width: 18ch; margin-bottom: 1rem; }
+  .hero .lede { font-size: 1.15rem; color: var(--on-viewer); }
+  .cta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1.25rem; margin: 1.5rem 0 2.5rem; }
+  .cta p { margin: 0; color: var(--on-viewer-soft); font-size: 0.95rem; }
+  .asked { font-size: 1.15rem; margin-bottom: 1rem; }
+  .exchange { display: grid; gap: 1.25rem; }
+  .pairing { display: grid; gap: 0.75rem; }
+  @media (min-width: 640px) { .pairing { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1040px) {
+    .exchange { grid-template-columns: 2fr 1fr; align-items: start; }
+  }
+  .callout { background: #353535; border-radius: 4px; padding: 1.1rem 1.2rem; }
+  .callout .gloss { color: var(--on-viewer-soft); font-size: 0.9rem; margin: 0.75rem 0 0; }
 
-  footer { border-top: 1px solid var(--line); padding: 2rem 0 3rem; color: var(--fog); font-size: 0.9rem; }
-  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.75rem; }
-  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 0 0 1.75rem; }
-  @media (max-width: 640px) { .pair { grid-template-columns: 1fr; } }
   figure { margin: 0; }
-  figure img { display: block; width: 100%; height: auto; border-radius: 6px; }
-  figcaption { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--fog); margin-top: 0.45rem; }
+  figcaption { font-size: 0.9rem; margin-top: 0.4rem; }
+  .viewer figcaption { color: var(--on-viewer-soft); }
+  .frame { position: relative; display: block; }
+  .mark { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
+  .mark .keyline { stroke: rgba(0, 0, 0, 0.55); stroke-width: 6; fill: none; }
+  .mark .pencil { stroke: var(--mark); stroke-width: 3; fill: none; stroke-linecap: round; }
+  /* The proposed crop's top edge only: shading the cropped area would
+     also darken the camera JPEG it is being compared on. */
+  .crop-shade { position: absolute; left: 0; right: 0; bottom: 35%; border-top: 4px dashed var(--mark); box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.55), 0 1px 0 rgba(0, 0, 0, 0.55); pointer-events: none; }
+  .crop-label {
+    position: absolute; right: 0.6rem; bottom: calc(35% + 0.5rem);
+    background: var(--viewer); color: var(--on-viewer); font-size: 0.8rem;
+    padding: 0.15rem 0.5rem; border-radius: 3px; pointer-events: none;
+  }
+
+  /* ---------- sessions ---------- */
+  section.story { padding: 3.5rem 0 1rem; }
+  .story > .wrap > p { color: var(--ink); }
+  .mat { background: var(--viewer); color: var(--on-viewer); border-radius: 6px; padding: 1rem; }
+  .mat figcaption { color: var(--on-viewer-soft); }
+  .cordoba-grid { display: grid; gap: 1rem; margin: 1.5rem 0 1rem; }
+  @media (min-width: 860px) {
+    .cordoba-grid { grid-template-columns: 1fr 1.5fr; align-items: start; }
+  }
+  .final-frame { display: grid; gap: 1rem; }
+  .detail-mark {
+    position: absolute; left: 28.03%; top: 55.98%; width: 43.95%; height: 44.02%;
+    border: 2px solid var(--mark); border-radius: 3px; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.55);
+    pointer-events: none;
+  }
+  .two-up { display: grid; gap: 1rem; }
+  @media (min-width: 720px) { .two-up { grid-template-columns: 1fr 1fr; } }
+  .pair-note { color: var(--on-viewer-soft); font-size: 0.95rem; margin: 1rem 0 0; }
+  .beats { list-style: none; padding: 0; margin: 1.75rem 0 1rem; display: grid; gap: 1.1rem; max-width: 46rem; }
+  .beats li { display: grid; gap: 0.3rem; }
+  .beats .desc { font-size: 0.95rem; color: var(--ink-soft); }
+  .provenance { font-size: 0.9rem; color: var(--ink-soft); }
+
+  details.more { margin: 0.5rem 0 1rem; }
+  details.more > summary {
+    display: inline-flex; align-items: center; gap: 0.4rem; min-height: 44px;
+    cursor: pointer; font-weight: 600; text-decoration: underline; text-underline-offset: 0.18em;
+    list-style: none;
+  }
+  details.more > summary::-webkit-details-marker { display: none; }
+  details.more > summary::before { content: "▸"; content: "▸" / ""; text-decoration: none; display: inline-block; }
+  details.more[open] > summary::before { content: "▾"; content: "▾" / ""; }
+  .transcript { background: #f7f7f7; border: 1px solid var(--line); border-radius: 6px; padding: 1.25rem; margin-top: 0.5rem; }
   .dialogue { display: grid; gap: 1.1rem; }
-  .turn { display: grid; grid-template-columns: 7.5rem 1fr; gap: 0.75rem; }
-  @media (max-width: 640px) { .turn { grid-template-columns: 1fr; gap: 0.2rem; } }
-  .who { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; padding-top: 0.3rem; }
-  .turn.ai .who { color: var(--signal); }
-  .turn.me .who { color: var(--brass); }
+  .turn { display: grid; grid-template-columns: 7rem 1fr; gap: 0.75rem; }
+  @media (max-width: 640px) { .turn { grid-template-columns: 1fr; gap: 0.15rem; } }
+  .who { font-size: 0.85rem; font-weight: 600; color: var(--ink-soft); padding-top: 0.2rem; }
+  .turn.ai .said { font-family: var(--serif); }
   .said p { margin: 0; }
   .said p + p { margin-top: 0.6rem; }
-  .turn.me .said { font-style: italic; }
-  .said .aside { font-family: var(--mono); font-size: 0.75rem; color: var(--fog); margin-bottom: 0.4rem; font-style: normal; }
-  .edit { margin-top: 0.85rem; background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 0.85rem 1rem; }
-  .edit-head { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--fog); margin: 0 0 0.5rem; }
-  .edit dl { margin: 0; }
-  .edit dt { font-weight: 600; font-size: 0.95rem; }
-  .edit dd { margin: 0.15rem 0 0.6rem; color: var(--fog); font-size: 0.95rem; }
-  .edit dd:last-child { margin-bottom: 0; }
-  .what { margin: 0 0 1.75rem; max-width: 36rem; font-size: 0.95rem; }
-  .shot { margin: 2rem 0 0; }
-  .shot img { border: 1px solid var(--line); border-radius: 8px; }
-  .shot figcaption { text-transform: none; letter-spacing: 0; font-family: inherit; font-size: 0.85rem; }
-  .tier-meaning { margin: -0.3rem 0 1.1rem; font-size: 0.85rem; font-style: italic; color: var(--fog); }
-  details.more { margin-top: 1.5rem; }
-  details.more summary { cursor: pointer; font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--signal); }
-  details.more[open] summary { margin-bottom: 1.25rem; }
-  ul.ask { margin: 0.5rem 0 1rem; padding-left: 1.2rem; }
-  .omitted { margin: 0; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--fog); text-align: center; }
-  .fine { margin: 1.5rem 0 0; font-size: 0.85rem; color: var(--fog); }
-  .assessment { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 0.9rem 1rem; }
-  .assessment-head { margin: 0 0 0.6rem; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--fog); }
-  .assessment-head strong { color: var(--signal); font-weight: 600; }
-  .assessment dl { margin: 0; }
-  .assessment dt { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--brass); margin-top: 0.6rem; }
-  .assessment dt:first-child { margin-top: 0; }
-  .assessment dd { margin: 0.2rem 0 0; font-size: 0.95rem; }
+  .said .aside, .said .tier-meaning { font-family: var(--sans); font-size: 0.85rem; color: var(--ink-soft); margin-bottom: 0.4rem; }
+  .assessment-head { font-family: var(--sans); font-weight: 600; }
+  .assessment dl { margin: 0.5rem 0 0; }
+  .assessment dt { font-family: var(--sans); font-size: 0.85rem; font-weight: 600; margin-top: 0.6rem; }
+  .assessment dd { margin: 0.15rem 0 0; }
   .assessment ul { margin: 0; padding-left: 1.1rem; }
-  .assessment li + li { margin-top: 0.3rem; }
-  /* The whole photo across the top, the details two to a row below it
-     (also on phones, so versions stay side by side); each is its own
-     lightbox group, so the details flip between themselves. */
-  .pair.whole { grid-template-columns: 1fr; margin-bottom: 1rem; }
-  .pair.versions { grid-template-columns: 1fr 1fr; }
-  .frame { position: relative; display: block; }
-  /* Where the detail crops come from (the crop's box in the full photo). */
-  .detail-mark {
-    position: absolute; left: 0; top: 69.23%; width: 30.76%; height: 30.77%;
-    border: 2px solid #fbf9f4; border-radius: 0 3px 0 6px;
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.45); pointer-events: none;
-  }
-  /* Over bright windows the white line needs a dark one inside it too. */
-  .detail-mark.cordoba {
-    left: 28.03%; top: 55.98%; width: 43.95%; height: 44.02%; border-radius: 3px 3px 6px 6px;
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.45), inset 0 0 0 1px rgba(0, 0, 0, 0.35);
-  }
-  figcaption strong { color: var(--signal); font-weight: 600; }
-  .pull { margin: 0 0 1.25rem; padding: 0.25rem 0 0.25rem 1rem; border-left: 3px solid var(--signal); max-width: 46rem; font-size: 1.1rem; }
-  .pull p { margin: 0 0 0.4rem; }
-  .pull footer { border: 0; padding: 0; font-family: var(--mono); font-size: 0.78rem; color: var(--fog); }
-  .photo-note { margin: -1rem 0 1.75rem; font-size: 0.85rem; color: var(--fog); }
-  section > p.lede-section { margin: -0.5rem 0 1.75rem; color: var(--fog); }
-  .diffs { margin: 0; padding-left: 1.1rem; font-size: 0.95rem; }
-  .diffs li + li { margin-top: 0.3rem; }
-  /* ---------- wide screens: two columns where there's something to look at ---------- */
-  .hero-text .what { margin-bottom: 1.75rem; }
-  @media (min-width: 960px) {
-    .hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 3rem; align-items: center; }
-    .hero .shot { margin: 0; }
-    .demo { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 2.5rem; align-items: start; }
-    .demo .pair { grid-template-columns: 1fr; gap: 1rem; margin: 0; }
-    .demo .pair.whole { margin-bottom: 1rem; }
-    .demo .pair.versions { grid-template-columns: 1fr 1fr; }
-    .demo .photo-note { margin: 0.75rem 0 0; }
-    .demo .turn { grid-template-columns: 6.5rem 1fr; }
-    .duo { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; border-top: 1px solid var(--line); }
-    .duo > section { border-top: 0; }
-    section > ol.steps { max-width: none; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
-  }
-  /* The photos follow the dialogue only where the whole column fits on
-     screen; on a short laptop screen it would hide its lower details. */
-  @media (min-width: 960px) and (min-height: 760px) {
-    .demo-photos { position: sticky; top: 1.25rem; }
-  }
+  .omitted { font-size: 0.85rem; color: var(--ink-soft); text-align: center; margin: 0; max-width: none; }
+  .fine { font-size: 0.85rem; color: var(--ink-soft); margin-top: 1rem; }
+
+  /* ---------- how it works, facts, beta ---------- */
+  .how { padding: 3.5rem 0 1rem; }
+  .how-grid { display: grid; gap: 2rem; }
+  @media (min-width: 860px) { .how-grid { grid-template-columns: 1fr 1fr; align-items: start; } }
+  .steps { margin: 0; padding-left: 1.3rem; display: grid; gap: 1rem; }
+  .steps li::marker { font-weight: 600; }
+  .steps p { margin: 0.15rem 0 0; }
+  .facts { padding: 3rem 0 1rem; }
+  .facts .wrap { display: grid; gap: 2rem; }
+  @media (min-width: 860px) { .facts .wrap { grid-template-columns: 1fr 1fr; } }
+  .facts h2 { font-size: 1.3rem; }
+  .beta { padding: 3rem 0 3.5rem; margin-top: 2rem; }
+  .beta .cta { margin: 1.25rem 0 1rem; }
+  .beta .cta p { color: var(--on-viewer); }
+  footer { padding: 1.5rem 0 2rem; font-size: 0.9rem; color: var(--ink-soft); }
+  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem; }
+
   /* ---------- enlarge photos (lightbox) ---------- */
-  .zoom {
-    display: block;
-    width: 100%;
-    padding: 0;
-    border: 0;
-    background: none;
-    cursor: zoom-in;
-    border-radius: 6px;
-  }
-  .zoom:focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; }
+  .zoom { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; border-radius: 4px; }
   .lightbox {
-    width: 100vw;
-    max-width: 100vw;
-    height: 100vh;
-    max-height: 100vh;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    background: rgba(12, 12, 13, 0.94);
-    color: #ede9e1;
+    width: 100vw; max-width: 100vw; height: 100vh; height: 100dvh; max-height: 100vh; max-height: 100dvh;
+    margin: 0; padding: 0; border: 0;
+    background: rgba(18, 18, 18, 0.96); color: var(--on-viewer);
   }
-  .lightbox::backdrop { background: rgba(12, 12, 13, 0.94); }
+  .lightbox::backdrop { background: rgba(18, 18, 18, 0.96); }
   .lightbox[open] { display: flex; flex-direction: column; }
-  .lightbox-stage {
-    flex: 1;
-    min-height: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.75rem;
-  }
-  .lightbox img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-    border-radius: 2px;
-  }
-  .lightbox-bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.75rem;
-    padding: 0.6rem 1rem 1rem;
-    font-family: var(--mono);
-    font-size: 0.78rem;
-    letter-spacing: 0.04em;
-  }
-  .lightbox-caption { flex: 1; text-align: center; }
-  .lightbox-hint { display: block; color: #a8a295; font-size: 0.7rem; margin-top: 0.2rem; }
-  .lightbox button.nav, .lightbox button.close {
-    font-family: var(--mono);
-    font-size: 0.78rem;
-    color: #ede9e1;
-    background: transparent;
-    border: 1px solid #55524c;
-    border-radius: 5px;
-    padding: 0.55rem 0.8rem;
-    cursor: pointer;
-  }
-  .lightbox button:hover { border-color: #e07a66; color: #e07a66; }
-  .lightbox button:focus-visible { outline: 2px solid #e07a66; outline-offset: 2px; }
-  .lightbox button[hidden] { display: none; }
+  .lightbox-stage { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; padding: 0.75rem; }
+  .lightbox img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 2px; }
+  .lightbox-bar { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 0.6rem 1rem 1rem; font-size: 0.9rem; }
+  .lightbox-caption { flex: 1; text-align: center; margin: 0; max-width: none; }
+  .lightbox-hint { display: block; color: var(--on-viewer-soft); font-size: 0.8rem; margin-top: 0.2rem; }
+  .lightbox button { min-width: 44px; min-height: 44px; font: inherit; color: var(--on-viewer); background: transparent; border: 1px solid #777; border-radius: 4px; padding: 0.4rem 0.8rem; cursor: pointer; }
+  .lightbox button:focus-visible { outline: 2px solid var(--on-viewer); }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; scroll-behavior: auto !important; } }
 </style>
 </head>
 <body>
   <header class="top">
     <div class="wrap">
-      <span class="wordmark">NOEMEO</span>
-      <span class="eyebrow">Closed beta</span>
+      <span class="wordmark">Noemeo</span>
+      <a href="#beta">Request beta access</a>
     </div>
   </header>
 
-  <main class="wrap">
-    <div class="hero">
-      <div class="hero-text">
-      <p class="eyebrow">For photographers</p>
-      <h1>Edit with a creative peer.</h1>
-      <p class="lede">A second pair of eyes for your edits, and a way to learn why they work.</p>
-      <p class="lede-more">Noemeo looks at your photo the way a fellow photographer would — what’s working, what’s holding it back, what you might try next — and talks it through with you. Post-processing becomes a conversation, not a chore.</p>
-      <p class="what"><strong>Noemeo Workspace is a desktop app for macOS</strong> (Windows support is planned). It reviews your photos and suggests edits; it never changes them. You make the edits yourself, in Lightroom Classic or whichever editor you use.</p>
-      <a class="button" href="#beta">Request beta access</a>
-      </div>
-      <div class="shot">
-        <figure>
-          <img src="images/workspace.jpg" width="1408" height="1265"
-               alt="Noemeo Workspace: on the left, the photo of Perugia with its tier, Strong, and a note of what Noemeo knows about it: the photo is meant to emphasise perspective through the town’s layered depth. On the right, the conversation: an edit to try in Lightroom’s Develop module, with masking, Texture, Clarity and Shadows steps, why, and what it might cost; then the photographer asks “Better?” and Noemeo answers that the new version is closer to what they were going for.">
-          <figcaption>Noemeo Workspace, open on the Perugia session below.</figcaption>
-        </figure>
-      </div>
-    </div>
+  <main>
+    <section class="viewer hero" aria-labelledby="title">
+      <div class="wrap">
+        <h1 id="title">A second pair of eyes for your edits.</h1>
+        <p class="lede">Noemeo measures what changed between your versions and tells you whether you’re closer to what you were going for. You make every edit.</p>
+        <div class="cta">
+          <a class="button" href="#beta">Request beta access</a>
+          <p>Mac app · any editor · your library stays on your computer</p>
+        </div>
 
-
-    <section aria-labelledby="how">
-      <p class="eyebrow">How it works</p>
-      <h2 id="how">A critique you can argue with</h2>
-      <ol class="steps">
-        <li>
-          <span class="n">01</span>
-          <div>
-            <h3>Review</h3>
-            <p>Add a photo and get a verdict on its craft and emotional impact, with a written critique: what's working, what isn't, and concrete suggestions.</p>
-          </div>
-        </li>
-        <li>
-          <span class="n">02</span>
-          <div>
-            <h3>Talk it through</h3>
-            <p>Ask why, push back, or explain what you were going for. Noemeo takes what you tell it into account, and you can see and remove anything it remembers about a photo.</p>
-          </div>
-        </li>
-        <li>
-          <span class="n">03</span>
-          <div>
-            <h3>Edit and compare</h3>
-            <p>Bring in a new version and ask whether it's better. Noemeo compares it against what came before instead of judging it from scratch.</p>
-          </div>
-        </li>
-      </ol>
-    </section>
-
-    <section aria-labelledby="cordoba">
-      <p class="eyebrow">A real session</p>
-      <h2 id="cordoba">Córdoba: better, or too much?</h2>
-      <p class="lede-section">Noemeo’s first read pointed out what the photographer hadn’t noticed: the bright windows at the bottom pull the eye away from the dome. The photographer darkened them and asked, “Is it better, or is it too much?” Noemeo measured the change and found the mask had reached beyond the windows:</p>
-      <blockquote class="pull">
-        <p>“The lower central vault is about 15 L* darker, substantially cooler, and less saturated, turning the original warm continuation into a grey, relatively detached section.”</p>
-        <footer>From Noemeo’s answer; the whole reply is below</footer>
-      </blockquote>
-      <p class="lede-section">The photographer had seen the darkening, but not the lost saturation: in Lightroom Classic a new mask doesn’t always start from neutral settings, and this one had turned saturation down too. Noemeo’s answer sent the photographer back to the sliders, and two more edits followed.</p>
-      <div class="demo">
-        <div class="demo-photos">
-          <div class="pair whole">
-            <figure>
+        <p class="asked"><span class="said-by">The photographer, after darkening the bright windows in Córdoba:</span>“Is it better, or is it too much?”</p>
+        <div class="exchange">
+          <div class="pairing" data-gallery="cordoba">
+            <figure data-group="cordoba">
               <span class="frame">
-                <img src="images/cordoba-final.jpg" width="1600" height="1065" loading="lazy"
-                     alt="Final version: looking straight up into the vaults of Córdoba’s cathedral, with gilded ribbed vaults at left, a pale carved dome at the centre, dark organ pipes at right and arched windows glowing along the bottom edge.">
-                <span class="detail-mark cordoba" aria-hidden="true"></span>
+                <img src="images/cordoba-original-windows.jpg" width="630" height="420"
+                     alt="Detail of the original: the lower vault in warm, pale gold light above a row of bright arched windows.">
               </span>
-              <figcaption>Final version</figcaption>
-            </figure>
-          </div>
-          <div class="pair versions">
-            <figure>
-              <img src="images/cordoba-original-windows.jpg" width="630" height="420" loading="lazy"
-                   alt="Detail of the original: the lower vault in warm, pale gold light above a row of bright arched windows.">
               <figcaption>Original</figcaption>
             </figure>
-            <figure>
-              <img src="images/cordoba-edit1-windows.jpg" width="630" height="420" loading="lazy"
-                   alt="The same detail after the first edit: the windows dimmer, and the lower vault darker, cooler and nearly grey.">
-              <figcaption><strong>First edit:</strong> vault greyer</figcaption>
-            </figure>
-            <figure>
-              <img src="images/cordoba-edit2-windows.jpg" width="630" height="420" loading="lazy"
-                   alt="The same detail after the second edit: the colour restored and the vault brighter and warmer again, close to the original.">
-              <figcaption>Second edit</figcaption>
-            </figure>
-            <figure>
-              <img src="images/cordoba-final-windows.jpg" width="630" height="420" loading="lazy"
-                   alt="The same detail in the final version: the vault a warmer gold, the windows still restrained.">
-              <figcaption>Third edit (final)</figcaption>
+            <figure data-group="cordoba">
+              <span class="frame">
+                <img src="images/cordoba-edit1-windows.jpg" width="630" height="420"
+                     alt="The same detail after the first edit: the windows dimmer, and the lower vault darker, cooler and nearly grey.">
+                <svg class="mark" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+                  <path class="keyline" vector-effect="non-scaling-stroke" d="M14 40 C14 18, 34 13, 46 15 C61 17, 66 30, 64 45 C62 62, 47 70, 35 68 C21 66, 13 55, 14 40 C15 30, 22 22, 30 19"/>
+                  <path class="pencil" vector-effect="non-scaling-stroke" d="M14 40 C14 18, 34 13, 46 15 C61 17, 66 30, 64 45 C62 62, 47 70, 35 68 C21 66, 13 55, 14 40 C15 30, 22 22, 30 19"/>
+                </svg>
+              </span>
+              <figcaption>First edit</figcaption>
             </figure>
           </div>
-          <p class="photo-note">The outline marks where the details come from. Enlarge a detail and flip through the four versions.</p>
+          <div class="callout">
+            <span class="said-by">Noemeo</span>
+            <p class="verdict-line">Compared with the version you started with: further from what you were going for.</p>
+            <blockquote class="noemeo">“The lower central vault is about 15 L* darker, substantially cooler, and less saturated, turning the original warm continuation into a grey, relatively detached section.”</blockquote>
+            <p class="gloss">L* is lightness. Noemeo measured it from the two exported photos; it never sees your editor’s settings.</p>
+          </div>
         </div>
-        <div class="demo-talk">
+      </div>
+    </section>
 
-          <div class="dialogue">
-            <div class="turn ai">
-              <span class="who">Noemeo</span>
-              <div class="said"><div class="assessment"><p class="assessment-head">Noemeo’s first read · <strong>Strong</strong></p><p class="tier-meaning">Strong: coherent, engaging, and substantially resolved, with qualities that sustain attention beyond competent execution.</p><dl><dt>What works</dt><dd>The upward viewpoint turns the intersecting vaults into an enveloping architectural experience, with sweeping ribs carrying the eye toward the central dome. Warm gold on the left, pale stone through the center, and dark organ pipes on the right give the intricate ornament a readable hierarchy. Detail remains clear enough to reward exploration without losing the larger sensation of grandeur.</dd><dt>What holds it back</dt><dd>The bright windows along the bottom edge pull attention away from the central vault, slightly weakening its role as the visual destination. Otherwise, the main limitation is interpretive rather than technical: the photograph conveys the building’s magnificence convincingly, but offers less of a distinctive emotional perspective beyond awe at its ornament and scale.</dd><dt>Leave as it is</dt><dd><ul><li>Keep the pronounced convergence of the columns and arches: it expresses the sensation of looking overhead and makes the architecture feel enveloping.</li><li>Keep the contrast between the warmer left-hand vault and the cooler central stonework, which separates the architectural spaces and prevents the ornament from becoming visually uniform.</li></ul></dd><dt>Edits to try</dt><dd><ul><li>Gently reduce the brightness of the bottom-edge windows and their immediate surrounds to keep attention circulating around the central dome; this would slightly reduce the sense of daylight flooding the interior, so avoid making the windows gray.</li></ul></dd></dl></div></div>
-            </div>
-            <p class="omitted">New version</p>
-            <div class="turn me">
-              <span class="who">Photographer</span>
-              <div class="said"><p>Reduced bottom brightness. Is it better, or is it too much?</p></div>
-            </div>
-            <div class="turn ai">
-              <span class="who">Noemeo</span>
-              <div class="said"><p class="aside">Compared with the version you started with: further from what you were going for.</p><p>The reduction is clearly present, and the current version handles the bright bottom windows better: they no longer pull as insistently from the central dome, so the tonal change itself moves the image closer to the assessment’s concern. It is not too dark in a clipping or blocked-shadow sense.</p><p>But the adjustment reaches too far beyond brightness. The lower central vault is about 15 L* darker, substantially cooler, and less saturated, turning the original warm continuation into a grey, relatively detached section. That weakens the warm-left/cool-center relationship and the sense of light carrying through the architecture. The extra local contrast near the bottom also makes that area busier, while the section immediately above has become slightly softer.</p><p>I’d keep some reduction at the windows, but restore much of the warmth and brightness in the surrounding vault. In short: the aim helped; the present mask is too broad and too chromatically heavy.</p></div>
-            </div>
-            <p class="omitted">Left out: a new version and one exchange</p>
-            <p class="omitted">New version</p>
-            <div class="turn me">
-              <span class="who">Photographer</span>
-              <div class="said"><p>Do you like it more? I slightly raised the temperature of the mask</p></div>
-            </div>
-            <div class="turn ai">
-              <span class="who">Noemeo</span>
-              <div class="said"><p class="aside">Compared with your previous version: closer to what you were going for.</p><p>Yes—more than the previous version. The slight temperature increase restores a natural golden continuity in the lower vault, so it no longer feels grey or detached, while the windows remain sufficiently restrained. The warmer area is noticeable, but it now relates to the warmth on the left rather than reading as an isolated colour patch.</p><p>It also improves on the original overall: the lower windows pull less strongly, and the central dome remains the clearer destination. There has been no troublesome global colour drift; the change is concentrated low in the frame. I’d stop here—the remaining brightness at the bottom helps explain the illumination and depth rather than competing with the dome.</p></div>
+    <section class="story" aria-labelledby="cordoba">
+      <div class="wrap">
+        <h2 id="cordoba">Córdoba: back to the sliders</h2>
+        <p>Noemeo never saw the mask, only the exported photos. It found from the pixels what the photographer hadn’t noticed: the new Lightroom mask had turned saturation down too. Two edits later:</p>
+        <div class="cordoba-grid">
+          <figure class="mat" data-group="cordoba-whole" data-caption="The whole photo, final version">
+            <span class="frame">
+              <img src="images/cordoba-final.jpg" width="1600" height="1065" loading="lazy"
+                   alt="The whole photograph, final version: looking straight up into the vaults of Córdoba’s cathedral, with gilded ribbed vaults at left, a pale carved dome at the centre, dark organ pipes at right and arched windows glowing along the bottom edge.">
+              <span class="detail-mark" aria-hidden="true"></span>
+            </span>
+            <figcaption>The whole photo; the outline marks the detail</figcaption>
+          </figure>
+          <figure data-group="cordoba" hidden>
+            <img src="images/cordoba-edit2-windows.jpg" width="630" height="420" loading="lazy"
+                 alt="The detail after the second edit: the colour restored and the vault brighter and warmer again.">
+            <figcaption>Second edit</figcaption>
+          </figure>
+          <div class="mat final-frame">
+            <figure data-group="cordoba">
+              <img src="images/cordoba-final-windows.jpg" width="630" height="420" loading="lazy"
+                   alt="The detail in the final version: the vault a warmer gold again, the windows still restrained.">
+              <figcaption>Final</figcaption>
+            </figure>
+            <div>
+              <span class="said-by">Noemeo, comparing it with the second edit</span>
+              <p class="verdict-line">Compared with your previous version: closer to what you were going for.</p>
+              <blockquote class="noemeo">“I’d stop here—the remaining brightness at the bottom helps explain the illumination and depth rather than competing with the dome.”</blockquote>
             </div>
           </div>
-          <details class="more">
-            <summary>Show the whole conversation</summary>
+        </div>
+        <p class="provenance">Excerpts from a real session, shared by the photographer, who made every edit. Noemeo’s replies are unedited.<span class="js-only" hidden> Enlarge a detail to flip through all four versions.</span></p>
+        <details class="more">
+          <summary>Read the whole conversation</summary>
+          <div class="transcript">
             <div class="dialogue">
               <div class="turn ai">
                 <span class="who">Noemeo</span>
@@ -417,255 +314,119 @@
                 <div class="said"><p class="aside">Compared with your previous version: closer to what you were going for.</p><p>Yes—more than the previous version. The slight temperature increase restores a natural golden continuity in the lower vault, so it no longer feels grey or detached, while the windows remain sufficiently restrained. The warmer area is noticeable, but it now relates to the warmth on the left rather than reading as an isolated colour patch.</p><p>It also improves on the original overall: the lower windows pull less strongly, and the central dome remains the clearer destination. There has been no troublesome global colour drift; the change is concentrated low in the frame. I’d stop here—the remaining brightness at the bottom helps explain the illumination and depth rather than competing with the dome.</p></div>
               </div>
             </div>
-          </details>
-          <p class="fine">From a real session, shared by the photographer, who made every edit. Noemeo’s replies and assessment are unedited. The short view leaves one exchange out; the whole conversation shows every turn up to the final edit, without the step-by-step Lightroom suggestions Noemeo attached to two replies.</p>
-        </div>
+            <p class="fine">Every turn up to the final edit, unedited, without the step-by-step Lightroom suggestions Noemeo attached to two replies.</p>
+          </div>
+        </details>
       </div>
     </section>
 
-    <section aria-labelledby="example">
-      <p class="eyebrow">A real session</p>
-      <h2 id="example">Perugia: is the new version better?</h2>
-      <p class="lede-section">One photo of Perugia, seven versions. Before each answer about a new version, Noemeo measures on your computer what the new version changed: tone, colour, local edits, contrast and fine detail. So when the photographer only asks “Better?”, it can say where the edit landed, say plainly when a change is too small to register, and keep its advice tied to what the photographer is after: perspective.</p>
-      <div class="demo">
-        <div class="demo-photos">
-          <div class="pair whole">
-            <figure>
+    <section class="story" aria-labelledby="intent">
+      <div class="wrap">
+        <h2 id="intent">Telling it what you meant</h2>
+        <p>Noemeo’s first read suggested cropping the hut out. Then the photographer said what it was.</p>
+        <div class="mat">
+          <div class="two-up">
+            <figure data-group="jungfrau">
               <span class="frame">
-                <img src="images/perugia-final.jpg" width="1600" height="1067" loading="lazy"
-                     alt="Final version: Perugia, in Umbria, in warm late light under a deep blue sky with a large white cloud; a square bell tower and church rise from layered tiled roofs, with blue mountains beyond.">
-                <span class="detail-mark" aria-hidden="true"></span>
+                <img src="images/jungfrau-camera.jpg" width="2000" height="1331" loading="lazy"
+                     alt="Straight from the camera: a wooden ski-lift station in snow below cloud-wrapped Alpine peaks, with lift cables and posts in the foreground; the sky a heavy navy, the snow greyish and the hut a dark block.">
+                <span class="crop-shade" aria-hidden="true"></span>
+                <span class="crop-label">Suggested crop</span>
               </span>
-              <figcaption>Final version</figcaption>
+              <figcaption>Straight from the camera</figcaption>
+            </figure>
+            <figure data-group="jungfrau">
+              <img src="images/jungfrau-final.jpg" width="2000" height="1331" loading="lazy"
+                   alt="The photographer’s final, same framing: brighter snow, a deep blue sky opening above the peaks, and the station’s timber warm against the cold slope.">
+              <figcaption>The photographer’s final</figcaption>
             </figure>
           </div>
-          <div class="pair versions">
-            <figure>
-              <img src="images/perugia-original-roofs.jpg" width="630" height="420" loading="lazy"
-                   alt="Detail of the first version: overlapping tiled roofs in the lower left of the town, in deep shadow, below a sunlit apartment block.">
-              <figcaption>Detail, first version</figcaption>
-            </figure>
-            <figure>
-              <img src="images/perugia-final-roofs.jpg" width="630" height="420" loading="lazy"
-                   alt="The same detail in the final version: the shadows on the roofs slightly lifted and the contrast a little lower.">
-              <figcaption>Detail, final version</figcaption>
-            </figure>
-          </div>
-          <p class="photo-note">The outline marks where the details come from. The edits are local and small: enlarge a detail and flip between the two versions to see them.</p>
+          <p class="pair-note">Same framing. The photographer’s edits were tone, colour and local detail; the crop Noemeo first suggested wasn’t taken.</p>
         </div>
-        <div class="demo-talk">
-
-          <div class="dialogue">
-            <div class="turn ai">
-              <span class="who">Noemeo</span>
-              <div class="said"><div class="assessment"><p class="assessment-head">Noemeo’s first read · <strong>Strong</strong></p><p class="tier-meaning">Strong: coherent, engaging, and substantially resolved, with qualities that sustain attention beyond competent execution.</p><dl><dt>What works</dt><dd>The sunlit church anchors the town beneath a sweeping cloud, giving the photograph a clear relationship between human scale and open sky. Overlapping tiled roofs establish depth, while the distant mountains soften into blue haze. Warm stone against cool sky feels inviting and expansive; the carefully held cloud highlights and textured foreground shadows keep that sense of place tangible.</dd><dt>What holds it back</dt><dd>The church is readable, but the large apartment blocks at left compete with it through their bright facades and repeated windows, making this more an attractive town panorama than a distinctive architectural portrait. The light reveals the scene beautifully without creating a particularly unusual moment. Four faint dust spots are present in plain areas, mostly noticeable only under magnification.</dd><dt>Leave as it is</dt><dd><ul><li>Keep the substantial sky: the cloud&#x27;s breadth gives the town scale and supplies the photograph&#x27;s expansive feeling.</li><li>Keep the deep foreground shadows, whose retained texture provides depth without making every roof compete equally for attention.</li></ul></dd></dl></div></div>
-            </div>
-            <p class="omitted">New version</p>
-            <div class="turn me">
-              <span class="who">Photographer</span>
-              <div class="said"><p>Do you like it better?</p></div>
-            </div>
-            <div class="turn ai">
-              <span class="who">Noemeo</span>
-              <div class="said"><p class="aside">Compared with the version you started with: further from what you were going for.</p><p>No—the original works better. The current edit preserves the expansive sky, cloud highlights, and overall colour, but it darkens the lower-left foreground and reduces detail across the lower half. That makes the roofs and façades softer and heavier, weakening the layered depth that made the town feel tangible; the church does not gain enough separation to offset that loss. Nothing appears materially clipped, so this is about tonal weight and texture rather than lost data. I’d return most of the lower-half softening and shadow darkening toward the original, while leaving the sky as it is.</p></div>
-            </div>
-            <div class="turn me">
-              <span class="who">Photographer</span>
-              <div class="said"><p>I wanted to show a perspective</p></div>
-            </div>
-            <div class="turn ai">
-              <span class="who">Noemeo</span>
-              <div class="said"><p>That helps: if the aim is to show perspective through the overlapping roofs and the town receding toward the mountains, the current edit moves against it slightly. Darkening and softening the lower half compresses the near-to-far layering; the original foreground texture gave the eye more footholds before moving toward the church and distant landscape. I’d keep the foreground shaded, but restore some local definition rather than brighten it broadly. The substantial sky still helps by setting the town’s scale.</p></div>
-            </div>
-            <p class="omitted">Left out: two new versions and two exchanges</p>
-            <div class="turn me">
-              <span class="who">Photographer</span>
-              <div class="said"><p>I&#x27;d slightly boost global contrast. What do you think?</p></div>
-            </div>
-            <p class="omitted">Left out: Noemeo’s reply · new version</p>
-            <div class="turn me">
-              <span class="who">Photographer</span>
-              <div class="said"><p>Did it. Better?</p></div>
-            </div>
-            <div class="turn ai">
-              <span class="who">Noemeo</span>
-              <div class="said"><p class="aside">Compared with your previous version: about the same.</p><p>Compared with the immediately previous version, it’s too close to call—and the files show no change above the measurement threshold. I can’t reliably see a global-contrast increase either, so if you applied one, it is extremely subtle.</p><p>That restraint is appropriate: the foreground keeps its texture, the church remains readable, and the cloud highlights are intact. It also avoids making the bright apartment blocks at left compete more strongly. Against the original, however, the current rendering still has softer mid-scale separation through the lower town, so this particular contrast adjustment hasn’t visibly recovered that layered definition. I’d leave it rather than push global Contrast harder; any further refinement would be better confined to modest Texture or Clarity over the town only, excluding the sky and distant mountains.</p></div>
-            </div>
-            <p class="omitted">Left out: a new version and one exchange</p>
-            <p class="omitted">New version</p>
-            <div class="turn me">
-              <span class="who">Photographer</span>
-              <div class="said"><p>Returned the mask to the approximately previous position</p></div>
-            </div>
-            <div class="turn ai">
-              <span class="who">Noemeo</span>
-              <div class="said"><p class="aside">Compared with your previous version: closer to what you were going for.</p><p>Yes—the measurements support that. Relative to the preceding version, the renewed mid-scale detail is concentrated across the central lower town rather than extending uniformly to the bottom edge, so the gradient is effectively back nearer its earlier position. The layered roofs and façades through the center read more distinctly, which better supports the intended recession toward the church and landscape.</p><p>The darker, slightly less saturated treatment at the lower-right edge also quiets that corner, although its reduced fine detail is a small trade-off. Compared with the original, the lowest foreground remains somewhat softer overall, but that keeps it from competing with the middle-distance town. I’d stop here rather than add more Clarity or Texture.</p></div>
-            </div>
+        <ol class="beats">
+          <li><span class="desc">Noemeo’s first read, on an early version, suggested cropping about 35% from the bottom</span><blockquote class="noemeo">“to remove the hut, cables, and foreground posts”</blockquote></li>
+          <li><span class="said-by">The photographer</span>“The hut is the anchor of the scene. In fact, it is the end station of a ski lift”</li>
+          <li><span class="said-by">Noemeo</span><blockquote class="noemeo">“If the hut is the end station of a ski lift, the cables and posts aren't clutter; they're what it is.”</blockquote></li>
+          <li><span class="desc">Told the story, it still read the photo as Competent. After three more versions, on the one before the final, it read Strong:</span><blockquote class="noemeo">“The warm timber station gives this cold, expansive landscape a human foothold: its modest size against the mountains makes the ski infrastructure feel vulnerable rather than intrusive.”</blockquote></li>
+        </ol>
+        <p class="provenance">Excerpts from a real session, shared by the photographer, who made every edit. Noemeo’s replies are unedited.</p>
+        <details class="more">
+          <summary>Read the whole conversation</summary>
+          <div class="transcript">
+<div class="dialogue">
+<div class="turn ai"><span class="who">Noemeo</span><div class="said"><div class="assessment"><p class="assessment-head">Noemeo’s first read · <strong>Competent</strong></p><p class="tier-meaning">Competent and clearly intentional: it has a readable organizing idea and real merits, but remains limited, familiar, or incompletely resolved.</p><dl><dt>What works</dt><dd><p>The mountain emerging from cloud gives the scene a convincing sense of cold, altitude, and changing weather. Dark rock on the left balances the luminous mist on the right, while the fenced path leads toward that disappearance. The restrained blue-white palette and well-preserved snow texture make the brightness feel atmospheric rather than washed out.</p></dd><dt>What holds it back</dt><dd><p>The foreground hut, cables, and clipped posts compete with the mountain-and-cloud relationship without forming an equally compelling subject of their own. Their dark edges interrupt the otherwise spacious, quiet landscape and make the framing feel insufficiently selective. Numerous faint dust spots are also present in the plain snow and sky, mostly noticeable under magnification.</p></dd><dt>Leave as it is</dt><dd><ul><li>Keep the pale snow and luminous cloud rendering, which preserves subtle texture while conveying the brightness of high altitude.</li><li>Keep the mountain’s gradual loss of definition into mist; that atmospheric softness supplies the photograph’s mystery and depth.</li></ul></dd><dt>Edits to try</dt><dd><ul><li>Crop approximately 35% from the bottom, leaving the other edges unchanged, to remove the hut, cables, and foreground posts and concentrate attention on the mountain, path, and advancing cloud; this sacrifices foreground depth and the building’s human-scale reference in exchange for a more coherent panoramic landscape.</li></ul></dd></dl></div></div></div>
+<p class="omitted">New version</p>
+<div class="turn me"><span class="who">Photographer</span><div class="said"><p>Do you like this version more?</p></div></div>
+<div class="turn ai"><span class="who">Noemeo</span><div class="said"><p class="aside">Compared with the version you started with: closer to what you were going for.</p><p>Yes, this version does more for the photograph, and the blind comparison of the two files came out the same way. The deep blue upper-left sky gives the mountain a dark backdrop to emerge against, and the added clarity on the right-hand cloud gives the weather real structure instead of a soft haze. The mountain and chalet also separate better from the snow, which gives the scene more depth. Snow detail is intact: nothing is clipped to white.</p><p>It isn't a free trade, though. Saturation roughly doubled and the balance went cooler, so the mood has moved from pale, high-key mist toward a crisper, more dramatic alpine blue. The original's gentler merging of mist and snow was part of what I'd flagged to keep, and some of that softness is gone, especially in the cloud on the right, where the extra clarity makes it look more etched. Whether that's welcome depends on what you want the picture to feel like: quiet and dissolving, or bold and wintry. Which are you after?</p><p>One thing hasn't changed: the hut, cables and clipped posts in the foreground still compete with the mountain-and-cloud relationship, and the stronger contrast makes the hut's dark edges a bit more insistent.</p></div></div>
+<div class="turn me"><span class="who">Photographer</span><div class="said"><p>The hut is the anchor of the scene. In fact, it is the end station of a ski lift</p></div></div>
+<div class="turn ai"><span class="who">Noemeo</span><div class="said"><p>That changes how I read the foreground. If the hut is the end station of a ski lift, the cables and posts aren't clutter; they're what it is. The photograph then has a human anchor at the bottom, the mountain and cloud at the top, and the fenced path tying the two together, so the scale of the whole thing reads through that small station. I'll stop treating the hut, cables and posts as things working against the picture, and I'm not going to suggest trimming around them.</p><p>That also shifts how I'd judge your edit. The darker, more contrasty rendering gives the hut more weight against the snow, and that suits it as an anchor. The thing to watch is whether the stronger clarity and saturation start to make the mountain compete with it. As it stands, the hut holds its own against the mountain, which is a reasonable balance. Is the story the station beneath the mountain, or the lift as a way up into it?</p></div></div>
+<p class="omitted">New version</p>
+<div class="turn me"><span class="who">Photographer</span><div class="said"><p>Is it better?</p></div></div>
+<div class="turn ai"><span class="who">Noemeo</span><div class="said"><p class="aside">Compared with the version you started with: closer to what you were going for.</p><p>Yes, it's better than where you started. The blind comparison against the original agreed: the current version works better overall, and so does my own look. The deeper blue sky and darker midtones set the mountain off, the hut and snow sit with more weight, and the highlights keep their texture (nothing is clipped to white). Framing is identical, so the hut, cables and posts you want kept are all still there.</p><p>It is a different mood, though. Saturation roughly doubled and the balance went cooler, so the pale, high-key mist of the original has become a crisper, bluer winter scene. The mountain's soft dissolve into cloud is still there, but the right-hand cloud is more detailed than before, so a little of the original's hush has gone. If the hush mattered to you, that's the cost; if you wanted the station standing out against a dramatic sky, it's a good trade.</p><p>Against the version right before this one, the comparison also favours the current version. The sky is richer and bluer, and the cloud on the right has more structure than the softer, flatter earlier pass, so the last change helped too.</p></div></div>
+<div class="turn ai"><span class="who">Noemeo</span><div class="said"><div class="assessment"><p class="assessment-head">Noemeo’s read, with your story · <strong>Competent</strong></p><p class="tier-meaning">Competent and clearly intentional: it has a readable organizing idea and real merits, but remains limited, familiar, or incompletely resolved.</p><dl><dt>What works</dt><dd><p>The lift station gives the mountain landscape a human foothold: its warm timber and solid geometry contrast with the cold snow and peaks disappearing into cloud. The ascending fence carries the eye from the foreground toward that disappearance, suggesting a route into uncertain weather. Preserved snow texture, clearly rendered rock, and softer atmospheric distance make the scene feel spacious and convincingly cold.</p></dd><dt>What holds it back</dt><dd><p>The station is clearly an anchor, but its shaded facade has less visual presence than the bright slope and expansive cloud above it, leaving the human-versus-mountain relationship somewhat understated. The foreground posts add a little competing edge activity, although they belong to the lift setting. Faint dust spots are present in plain areas, mostly noticeable only at magnification.</p></dd><dt>Leave as it is</dt><dd><ul><li>Keep the cloud-softened mountains and broad pale area on the right: their loss of definition conveys changing weather and makes the station feel exposed.</li><li>Keep the cool snow and blue shadows, which establish the alpine cold against the station’s warmer wood.</li></ul></dd><dt>Edits to try</dt><dd><ul><li>Gently lift the station’s timber midtones locally, without brightening its snow-covered roof, so the intended anchor holds attention against the bright slope; this would slightly reduce its shadowed, sheltered feeling, so keep the adjustment restrained.</li></ul></dd></dl></div></div></div>
+<p class="omitted">New version</p>
+<div class="turn me"><span class="who">Photographer</span><div class="said"><p>lifted the station’s timber midtones</p></div></div>
+<div class="turn ai"><span class="who">Noemeo</span><div class="said"><p class="aside">Compared with your previous version: hard to tell.</p><p>I'm not sure the measurements show it. Between the version before and this one, the only measured change is shadows up about 2 L*, which fits a small lift in the darkest parts of the frame but is too faint to say it hit the station's timber specifically. These numbers can miss very local edits, so I'm not ruling it out. Judging the image itself: the timber does read slightly warmer and more present against the snow than in the earlier version, and the facade is still the darkest, warmest mass in the frame, which is what lets the station hold its place as the anchor. That was the thing the assessment found understated, so the direction is right. The mountain and cloud, now with stronger clarity, are still the louder voices, and the station is only partly closing that gap. If you want to take it further, a gentle local lift on the facade would do it. The cost is that pushing too far flattens the contrast that makes the wood feel solid and warm against the cold snow.</p></div></div>
+<p class="omitted">Left out: an edit card with Lightroom steps</p>
+<p class="omitted">New version</p>
+<div class="turn me"><span class="who">Photographer</span><div class="said"><p>Can you see the difference now?</p></div></div>
+<div class="turn ai"><span class="who">Noemeo</span><div class="said"><p class="aside">Compared with your previous version: closer to what you were going for.</p><p>Looking at the current version directly, yes, but only just. The measurements against the version before show fine detail up about 9% and mid-scale detail up about 5%, all in the lower-left to centre of the frame, roughly where the hut and the snow around it sit. They show no change in brightness or colour there, so what you've done reads as added crispness, not a lift in the timber's tone. In the image the planking and the window and door details are a little more distinct, and the hut picks up some extra local contrast against the snow. That helps it hold its own slightly better as the anchor, because it now has more definition to set against the busy cloud and mountain. But the wood itself isn't visibly lighter or warmer than before, so if your aim was brightening the midtones, the edit may not have landed, or it's too faint to measure. The cost to watch is that sharpening and clarity on the wood and the surrounding snow can start to look crunchy, so check the snow near the base of the hut at full size. If you want the facade to carry more weight, a small local lift in exposure or shadows on the wood would do more than more texture.</p></div></div>
+<p class="omitted">New version</p>
+<div class="turn me"><span class="who">Photographer</span><div class="said"><p>I lifted exposure locally and slightly lifted temperature, too</p></div></div>
+<div class="turn ai"><span class="who">Noemeo</span><div class="said"><p class="aside">Compared with your previous version: closer to what you were going for.</p><p>That fits the earlier measurements, and I should correct myself. The version before this one showed a small local change over the hut area (roughly x 27%-48%, y 79%-89%) that was more saturated and warmer, which matches a slight temperature lift there, and I read it as sharpening only. Against that version, this latest export shows the shadows up about 2 L*, which fits a gentle local exposure lift, though it's too faint for me to say it landed on the hut specifically. Looking at the image directly, the timber does read a touch brighter and warmer, and the facade is more legible, with the planks, windows and door easier to separate from the dark base. That's the right direction for the station: the warm wood against the cold snow and blue shadows is the human-versus-mountain contrast the photo runs on, and you've nudged it without breaking the cool palette. The restraint is working. Two things to watch: if the warmth keeps rising, the hut can start to look pasted onto the scene instead of lit by the same cold light, and if the lift reaches the snow around its base you'll lose some of the shade that makes it feel tucked into the slope. Right now it holds together. The station is still the quieter voice next to the clarified mountain and cloud, so a little more lift would help, but I'd stop well short of making it glow.</p></div></div>
+<div class="turn ai"><span class="who">Noemeo</span><div class="said"><div class="assessment"><p class="assessment-head">Noemeo’s read, with your story · <strong>Strong</strong></p><p class="tier-meaning">Strong: coherent, engaging, and substantially resolved, with qualities that sustain attention beyond competent execution.</p><dl><dt>What works</dt><dd><p>The warm timber station gives this cold, expansive landscape a human foothold: its modest size against the mountains makes the ski infrastructure feel vulnerable rather than intrusive. The diagonal fence carries the eye uphill into cloud, while the cables connect the hut to the surrounding terrain. Detailed snow, rugged rock and dissolving peaks create a convincing progression from tangible shelter to uncertain weather.</p></dd><dt>What holds it back</dt><dd><p>The hut anchors the composition, but its shaded facade has less visual presence than the broad sunlit slope, so the intended story takes a moment to register. The image conveys alpine scale more strongly than a distinctive moment at the lift station; the infrastructure is legible, but largely inactive. Faint dust spots are present in plain areas, mostly noticeable only under magnification.</p></dd><dt>Leave as it is</dt><dd><ul><li>Keep the soft, low-contrast mountains within the cloud, which convey moving weather and make the clearly defined station feel grounded.</li><li>Keep the broad pale snowfields and cloud space, which establish the station’s small scale and the exposed character of its setting.</li></ul></dd><dt>Edits to try</dt><dd><ul><li>Gently lift the timber facade’s midtones without brightening its snowy roof, giving the station more presence against the luminous slope; too much lifting would sacrifice the convincing sense that the building sits in cold shade.</li></ul></dd></dl></div></div></div>
+<p class="omitted">New version</p>
+<div class="turn me"><span class="who">Photographer</span><div class="said"><p>Reduced global exposure by 1/4 stop</p></div></div>
+<div class="turn ai"><span class="who">Noemeo</span><div class="said"><p>I can't see a clean comparison for that step. Nothing was measured between the last version and this one, so I'll judge it by eye, and a quarter stop is a small move that the measurements may simply miss. What I can say is that the image still holds together. The snow keeps its texture and gradation, with nothing clipped to white and almost nothing crushed to black, so the quarter stop hasn't cost you highlight detail, which was the main thing to protect with this much white in the frame. The trade is quieter than the rest of the edit. A global drop deepens the already cooler, darker midtones, and the soft hush of the original pale mist drifts a bit further away. The timber is where it matters most: you lifted it locally and warmed it, and a global pull-down takes a little of that back, since the wood and the snow around it both darken. If the hut felt right a moment ago, check that it still holds its own against the slope. If it now sits a little quiet, the fix is to restore the local lift on the facade rather than undo the global change. The sunlit snow and the sky are the parts that gain from the lower exposure, with the brightest snowfields and the cloud edge looking calmer. So is the aim a moodier, heavier winter feel, or were you protecting highlights? That decides whether the quarter stop is a keeper.</p></div></div>
+<div class="turn me"><span class="who">Photographer</span><div class="said"><p>Exactly, I aimed at the snow and the sky. I wouldn't make timber warmer or brighter than it is now</p></div></div>
+<div class="turn ai"><span class="who">Noemeo</span><div class="said"><p>That settles it: the quarter stop was for the snow and sky, and the timber stays as it is, so I'll stop nudging it. That also retires my earlier idea of a little more lift on the facade. Judged on what you aimed at, the global pull-down does its job. The sunlit slope and cloud edge sit a bit calmer, and nothing is clipped, so the snow texture is intact. I'd only keep an eye on one thing at full size: the slope is the broadest surface in the frame, so any further darkening will start to turn the white toward grey. Right now it still reads as bright snow, so I'd stop here.</p></div></div>
+</div>
+            <p class="fine">Every turn, unedited, without the edit card with Lightroom steps Noemeo attached to one reply.</p>
           </div>
-          <details class="more">
-            <summary>Show the whole session</summary>
-            <div class="dialogue">
-              <div class="turn ai">
-                <span class="who">Noemeo</span>
-                <div class="said"><div class="assessment"><p class="assessment-head">Noemeo’s first read · <strong>Strong</strong></p><p class="tier-meaning">Strong: coherent, engaging, and substantially resolved, with qualities that sustain attention beyond competent execution.</p><dl><dt>What works</dt><dd>The sunlit church anchors the town beneath a sweeping cloud, giving the photograph a clear relationship between human scale and open sky. Overlapping tiled roofs establish depth, while the distant mountains soften into blue haze. Warm stone against cool sky feels inviting and expansive; the carefully held cloud highlights and textured foreground shadows keep that sense of place tangible.</dd><dt>What holds it back</dt><dd>The church is readable, but the large apartment blocks at left compete with it through their bright facades and repeated windows, making this more an attractive town panorama than a distinctive architectural portrait. The light reveals the scene beautifully without creating a particularly unusual moment. Four faint dust spots are present in plain areas, mostly noticeable only under magnification.</dd><dt>Leave as it is</dt><dd><ul><li>Keep the substantial sky: the cloud&#x27;s breadth gives the town scale and supplies the photograph&#x27;s expansive feeling.</li><li>Keep the deep foreground shadows, whose retained texture provides depth without making every roof compete equally for attention.</li></ul></dd></dl></div></div>
-              </div>
-              <p class="omitted">New version</p>
-              <div class="turn me">
-                <span class="who">Photographer</span>
-                <div class="said"><p>Do you like it better?</p></div>
-              </div>
-              <div class="turn ai">
-                <span class="who">Noemeo</span>
-                <div class="said"><p class="aside">Compared with the version you started with: further from what you were going for.</p><p>No—the original works better. The current edit preserves the expansive sky, cloud highlights, and overall colour, but it darkens the lower-left foreground and reduces detail across the lower half. That makes the roofs and façades softer and heavier, weakening the layered depth that made the town feel tangible; the church does not gain enough separation to offset that loss. Nothing appears materially clipped, so this is about tonal weight and texture rather than lost data. I’d return most of the lower-half softening and shadow darkening toward the original, while leaving the sky as it is.</p></div>
-              </div>
-              <div class="turn me">
-                <span class="who">Photographer</span>
-                <div class="said"><p>I wanted to show a perspective</p></div>
-              </div>
-              <div class="turn ai">
-                <span class="who">Noemeo</span>
-                <div class="said"><p>That helps: if the aim is to show perspective through the overlapping roofs and the town receding toward the mountains, the current edit moves against it slightly. Darkening and softening the lower half compresses the near-to-far layering; the original foreground texture gave the eye more footholds before moving toward the church and distant landscape. I’d keep the foreground shaded, but restore some local definition rather than brighten it broadly. The substantial sky still helps by setting the town’s scale.</p></div>
-              </div>
-              <p class="omitted">New version</p>
-              <div class="turn me">
-                <span class="who">Photographer</span>
-                <div class="said"><p>Better?</p></div>
-              </div>
-              <div class="turn ai">
-                <span class="who">Noemeo</span>
-                <div class="said"><p class="aside">Compared with your previous version: closer to what you were going for.</p><p>Compared with the immediately previous version, yes. Lifting the lower town and restoring foreground detail makes the overlapping roofs easier to follow, so the eye moves more clearly from the near buildings through the church and toward the mountains. The gentler overall contrast also keeps the foreground from becoming a heavy visual block.</p><p>Compared with the original, however, it still gives up some crisp local separation across the lower half, so the original conveys the layered recession a little more decisively. Colour and white balance have remained essentially stable, and the substantial sky still provides useful scale. I’d stop lifting the shadows here and restore a modest amount of Texture/Clarity selectively to the town—not the sky or distant mountains.</p></div>
-              </div>
-              <p class="omitted">New version</p>
-              <div class="turn me">
-                <span class="who">Photographer</span>
-                <div class="said"><p>And now?</p></div>
-              </div>
-              <div class="turn ai">
-                <span class="who">Noemeo</span>
-                <div class="said"><p class="aside">Compared with your previous version: closer to what you were going for.</p><p>Yes—this latest change moves it closer than the immediately previous version. The restored fine detail in the lower-left and central town makes roof edges and overlapping façades read more distinctly, strengthening the layered recession you want without broadly brightening the shadows. The sky, distant haze, and colour remain stable, so the added foreground definition has not cost the expansive atmosphere.</p><p>Against the original, the current version is still about 5% gentler in overall contrast and retains somewhat less mid-scale definition across much of the lower half. That makes it slightly softer and calmer, while the original separates the architectural layers more decisively. I’d leave this version here rather than add more sharpening: further detail could make the foreground roofs and bright apartment blocks compete harder with the church.</p></div>
-              </div>
-              <div class="turn me">
-                <span class="who">Photographer</span>
-                <div class="said"><p>I&#x27;d slightly boost global contrast. What do you think?</p></div>
-              </div>
-              <div class="turn ai">
-                <span class="who">Noemeo</span>
-                <div class="said"><p>A slight global contrast boost makes sense. It should recover some of the near-to-far separation still missing versus the original, while preserving the useful detail you restored in the town. Keep it restrained: watch the bright apartment façades at left and the cloud highlights, since stronger contrast could make both compete more with the church. I’d try about +3 to +5 Contrast and stop if the foreground shadows begin to feel heavier; the current blacks already retain texture, so there is no need to deepen them aggressively.</p></div>
-              </div>
-              <p class="omitted">New version</p>
-              <div class="turn me">
-                <span class="who">Photographer</span>
-                <div class="said"><p>Did it. Better?</p></div>
-              </div>
-              <div class="turn ai">
-                <span class="who">Noemeo</span>
-                <div class="said"><p class="aside">Compared with your previous version: about the same.</p><p>Compared with the immediately previous version, it’s too close to call—and the files show no change above the measurement threshold. I can’t reliably see a global-contrast increase either, so if you applied one, it is extremely subtle.</p><p>That restraint is appropriate: the foreground keeps its texture, the church remains readable, and the cloud highlights are intact. It also avoids making the bright apartment blocks at left compete more strongly. Against the original, however, the current rendering still has softer mid-scale separation through the lower town, so this particular contrast adjustment hasn’t visibly recovered that layered definition. I’d leave it rather than push global Contrast harder; any further refinement would be better confined to modest Texture or Clarity over the town only, excluding the sky and distant mountains.</p></div>
-              </div>
-              <p class="omitted">New version</p>
-              <div class="turn me">
-                <span class="who">Photographer</span>
-                <div class="said"><p>I moved the linear gradient mask from the bottom up to cover more of the town, and slightly boosted clarity and texture in that mask</p></div>
-              </div>
-              <div class="turn ai">
-                <span class="who">Noemeo</span>
-                <div class="said"><p class="aside">Compared with your previous version: closer to what you were going for.</p><p>Yes—the measurements support that change. Compared with the prior version, fine detail rises across the left third of the lower half, so roof edges and overlapping façades read more distinctly. That moves the image closer to your aim of emphasizing layered recession: the foreground now establishes a clearer first plane before the church and distant landscape.</p><p>The trade-off is unevenness: mid-scale detail falls across much of the lower-right town while fine detail increases at the far right, and that corner is also slightly brighter and more saturated. This makes the right edge feel a little busier without adding as much depth as the restored detail on the left. Against the original, the current image remains about 6% gentler in overall contrast and broadly softer through the bottom quarter, so the town still separates less decisively—but the softer rendering keeps the foreground from overwhelming the church and cloud. I’d keep the gradient position and avoid adding more Texture or Clarity.</p></div>
-              </div>
-              <p class="omitted">New version</p>
-              <div class="turn me">
-                <span class="who">Photographer</span>
-                <div class="said"><p>Returned the mask to the approximately previous position</p></div>
-              </div>
-              <div class="turn ai">
-                <span class="who">Noemeo</span>
-                <div class="said"><p class="aside">Compared with your previous version: closer to what you were going for.</p><p>Yes—the measurements support that. Relative to the preceding version, the renewed mid-scale detail is concentrated across the central lower town rather than extending uniformly to the bottom edge, so the gradient is effectively back nearer its earlier position. The layered roofs and façades through the center read more distinctly, which better supports the intended recession toward the church and landscape.</p><p>The darker, slightly less saturated treatment at the lower-right edge also quiets that corner, although its reduced fine detail is a small trade-off. Compared with the original, the lowest foreground remains somewhat softer overall, but that keeps it from competing with the middle-distance town. I’d stop here rather than add more Clarity or Texture.</p></div>
-              </div>
-            </div>
-          </details>
-          <p class="fine">From a real session, shared by the photographer. Noemeo’s replies and assessment are unedited. The short view leaves some turns out; the whole session shows every turn, without the edit cards Noemeo attached to some replies.</p>
+        </details>
+      </div>
+    </section>
+
+    <section class="how" aria-labelledby="how">
+      <div class="wrap how-grid">
+        <div>
+          <h2 id="how">How it works</h2>
+          <ol class="steps">
+            <li><h3>Review</h3><p>A verdict on craft and impact: what works, what holds it back, edits to try.</p></li>
+            <li><h3>Talk it through</h3><p>Tell it what you were going for; its advice follows your aim. You can see and remove anything it remembers about a photo.</p></li>
+            <li><h3>Compare versions</h3><p>Export a new version from any editor. On your computer, Noemeo measures what changed in the picture itself — tone, colour, local edits, detail — and says whether it got closer. It says plainly when a change is too small to register.</p></li>
+          </ol>
+        </div>
+        <figure class="mat" data-group="workspace">
+          <img src="images/workspace.jpg" width="1408" height="1265" loading="lazy"
+               alt="Noemeo Workspace: on the left, a photo of Perugia with its tier and a note of what Noemeo knows about it; on the right, the conversation, with an edit to try in Lightroom’s Develop module and Noemeo’s answer about the new version.">
+          <figcaption>Noemeo Workspace on a Mac</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="facts" aria-label="Editors and privacy">
+      <div class="wrap">
+        <div>
+          <h2>Any editor; a shortcut for Lightroom Classic</h2>
+          <p>Noemeo works from the exported photo, so any editor will do. Lightroom Classic users can also send photos from the catalog and keep each critique beside the photo. Suggested ratings and flags are applied only when you agree; suggested keywords are added (or replace Noemeo’s earlier ones) when you run that command. You can undo either.</p>
+        </div>
+        <div>
+          <h2>Your library stays on your computer</h2>
+          <p>Your photos, conversations and everything Noemeo learns about them are kept on your computer. For each request (a review, a reply in the conversation, a comparison of versions, keywords), the photos and text it needs pass through Noemeo’s service on Amazon Web Services, which doesn’t store them, to the AI model’s provider (during the beta, OpenAI or Anthropic), which may keep them for a limited period but doesn’t use them for training. Noemeo’s cloud keeps only your sign-in, the names of your computers and when each was last used, how much of your allowance you’ve used and, for 30 days, a log of each request: its time, size, type and outcome, your IP address and an account ID, never its content.</p>
         </div>
       </div>
     </section>
 
-    <section aria-labelledby="compare">
-      <p class="eyebrow">Comparing two photos</p>
-      <h2 id="compare">Two frames of the same causeway: which one?</h2>
-      <div class="demo">
-        <div class="demo-photos">
-          <div class="pair">
-            <figure>
-              <img src="images/lowtide-after.jpg" width="1600" height="900" loading="lazy"
-                   alt="Shot A: the empty causeway leading to a larger island fortress, with a long concrete foreground and a brighter, broken sky.">
-              <figcaption>Shot A</figcaption>
-            </figure>
-            <figure>
-              <img src="images/compare-b.jpg" width="1600" height="900" loading="lazy"
-                   alt="Shot B: a wider frame of the same causeway curving across broad exposed seabed with reddish rocks at left, a small distant fortress, and a darker overhead cloud.">
-              <figcaption>Shot B, a wider frame</figcaption>
-            </figure>
-          </div>
-        </div>
-        <div class="demo-talk">
-
-          <div class="dialogue">
-            <div class="turn ai">
-              <span class="who">Noemeo</span>
-              <div class="said"><p>A is tighter and more destination-driven: the larger fortress gives the causeway a stronger payoff, though the path becomes a visually heavy foreground slab. B steps back, making the exposed tidal landscape feel broader and lonelier; its stronger left-hand rocks add depth, while the orange buoy near the right edge pulls attention sharply. A’s brighter clouds feel more open, whereas B’s darker overhead cloud gives the scene greater austerity. With no stated purpose yet, these are two distinct emphases rather than a clear winner.</p><div class="edit"><p class="edit-head">Key differences</p><ul class="diffs"><li>A frames the fortress substantially larger, while B makes it a smaller element within a broader tidal landscape.</li><li>A’s causeway enters from the lower right; B places it nearer center and shows more of its curve.</li><li>B includes stronger reddish foreground rocks on the left, creating more texture and depth than A’s smoother mudflats.</li><li>A has brighter, broken clouds near the horizon; B carries a darker overhead cloud layer and mood.</li></ul></div></div>
-            </div>
-            <div class="turn me">
-              <span class="who">Photographer</span>
-              <div class="said"><p>Which image is more eye-catching?</p></div>
-            </div>
-            <div class="turn ai">
-              <span class="who">Noemeo</span>
-              <div class="said"><p class="aside">Favours A</p><p>Shot A is more immediately eye-catching. Its larger, clearer fortress provides a stronger visual payoff, and the brighter sky separates the landmark more decisively. B has richer foreground texture and a moodier atmosphere, but its smaller fortress and broad terrain distribute attention more diffusely; the orange buoy also competes with the intended subject.</p></div>
-            </div>
-            <div class="turn me">
-              <span class="who">Photographer</span>
-              <div class="said"><p>It is a story of a tide</p></div>
-            </div>
-            <div class="turn ai">
-              <span class="who">Noemeo</span>
-              <div class="said"><p class="aside">Favours B</p><p>For a story about the tide, Shot B serves the idea better. Its wider field of exposed rocks, pools, channels, and wet sand makes the retreating sea—not merely the fortress—the subject. The longer causeway reinforces the revealed passage across the seabed. The orange buoy remains distracting, so I would remove or subdue it; a modest sky crop could also give the tidal textures more authority.</p></div>
-            </div>
-          </div>
-          <p class="fine">The whole comparison session, shared by the photographer. Noemeo’s replies are unedited; the key differences it listed are shown for its first reply.</p>
+    <section class="viewer beta" id="beta" aria-labelledby="beta-title">
+      <div class="wrap">
+        <h2 id="beta-title">Join the closed beta</h2>
+        <p>Free, 20 photo reviews, macOS (Windows planned). Places are limited; if there’s one, we’ll send you a download link and a key.</p>
+        <div class="cta">
+          <a class="button" href="mailto:ilya@noemeo.com?subject=Noemeo%20beta%20access&amp;body=Which%20editor%20I%20use%3A%20%0AWhat%20kind%20of%20photography%20I%20do%3A%20%0AWhat%20I%E2%80%99d%20most%20like%20a%20second%20opinion%20on%3A%20%0A">Request beta access<small>opens your email</small></a>
+          <p>or write to <a href="mailto:ilya@noemeo.com">ilya@noemeo.com</a></p>
         </div>
       </div>
-    </section>
-
-    <div class="duo">
-      <section aria-labelledby="lightroom">
-        <p class="eyebrow">Works with Lightroom Classic</p>
-        <h2 id="lightroom">Review photos straight from your catalog</h2>
-        <ul class="plain">
-          <li>Review selected photos from the Library menu and keep the critique alongside each photo.</li>
-          <li>Suggested ratings and flags are only ever suggestions — Noemeo asks before changing anything, and you can undo it.</li>
-          <li>Suggest descriptive keywords for your photos.</li>
-          <li>Lightroom is optional: you can also add photos to Noemeo directly.</li>
-        </ul>
-      </section>
-
-      <section aria-labelledby="privacy">
-        <p class="eyebrow">Privacy</p>
-        <h2 id="privacy">Your photos are stored only on your computer</h2>
-        <div class="note">
-          <p>Your photos, conversations and everything Noemeo learns about them are kept on your own computer — not in Noemeo's cloud.</p>
-          <p>Reviewing a photo does mean sending it out: for each review, Noemeo sends that photo and the text it needs to an AI model, through Amazon Web Services. It is processed for that request and not stored. Noemeo's cloud keeps only what an account needs: your sign-in, the names of the computers you use Noemeo on, and how much of your allowance you've used.</p>
-        </div>
-      </section>
-    </div>
-
-    <section aria-labelledby="beta">
-      <p class="eyebrow">Availability</p>
-      <h2 id="beta">Noemeo is in closed beta</h2>
-      <p>The beta is free, covers reviews of 20 photos, and is open to a limited number of photographers. Noemeo Workspace runs on macOS for now; Windows support is planned.</p>
-      <p>To join, write to <a href="mailto:ilya@noemeo.com?subject=Noemeo%20beta%20access">ilya@noemeo.com</a> and tell us:</p>
-      <ul class="ask">
-        <li>which editor you use (Lightroom Classic or another),</li>
-        <li>what kind of photography you do,</li>
-        <li>what you'd most like a second opinion on.</li>
-      </ul>
-      <p>If there's a place, we'll send you a download link for the Mac app and a key to activate it.</p>
     </section>
   </main>
 
@@ -675,19 +436,21 @@
       <a href="mailto:ilya@noemeo.com">ilya@noemeo.com</a>
     </div>
   </footer>
+
   <dialog class="lightbox" id="lightbox" aria-label="Enlarged photo">
     <div class="lightbox-stage"><img id="lightbox-image" alt=""></div>
     <div class="lightbox-bar">
-      <button type="button" class="nav" id="lightbox-prev" aria-label="Previous photo">&larr;</button>
+      <button type="button" id="lightbox-prev" aria-label="Previous photo">&larr;</button>
       <p class="lightbox-caption" aria-live="polite"><span id="lightbox-caption"></span><span class="lightbox-hint" id="lightbox-hint"></span></p>
-      <button type="button" class="nav" id="lightbox-next" aria-label="Next photo">&rarr;</button>
-      <button type="button" class="close" id="lightbox-close">Close</button>
+      <button type="button" id="lightbox-next" aria-label="Next photo">&rarr;</button>
+      <button type="button" id="lightbox-close">Close</button>
     </div>
   </dialog>
 
   <script>
-  // Click a demo photo to see it large; flip between the two photos of a
-  // pair to compare them. Without JavaScript the photos stay as they are.
+  // Click a photo to see it large; flip through the other photos of its
+  // group (data-group, in page order, hidden figures included) to compare
+  // versions. Without JavaScript the photos stay as they are.
   (function () {
     var dialog = document.getElementById('lightbox');
     if (!dialog || typeof dialog.showModal !== 'function') return;
@@ -696,6 +459,8 @@
     var hint = document.getElementById('lightbox-hint');
     var prev = document.getElementById('lightbox-prev');
     var next = document.getElementById('lightbox-next');
+    document.querySelectorAll('.js-only').forEach(function (el) { el.hidden = false; });
+    var groups = {};
     var group = [];
     var index = 0;
     var touch = window.matchMedia('(pointer: coarse)').matches;
@@ -706,28 +471,29 @@
       image.src = item.src;
       image.alt = item.alt;
       caption.textContent = item.caption + (group.length > 1 ? ' (' + (index + 1) + ' of ' + group.length + ')' : '');
-      hint.textContent = group.length < 2 ? '' : touch ? 'Swipe to compare' : 'Use \u2190 \u2192 to compare';
+      hint.textContent = group.length < 2 ? '' : touch ? 'Swipe to compare' : 'Use ← → to compare';
       prev.hidden = next.hidden = group.length < 2;
     }
 
-    document.querySelectorAll('.pair, .shot').forEach(function (pair) {
-      var items = [];
-      pair.querySelectorAll('figure').forEach(function (figure, i) {
-        var img = figure.querySelector('img');
-        var label = (figure.querySelector('figcaption') || {}).textContent || 'Photo';
-        items.push({ src: img.currentSrc || img.src, alt: img.alt, caption: label });
-        var button = document.createElement('button');
-        button.type = 'button';
-        button.className = 'zoom';
-        button.setAttribute('aria-label', 'Enlarge: ' + label);
-        img.parentNode.insertBefore(button, img);
-        button.appendChild(img);
-        button.addEventListener('click', function () {
-          group = items;
-          show(i);
-          dialog.showModal();
-          dialog.focus();
-        });
+    document.querySelectorAll('figure[data-group]').forEach(function (figure) {
+      var name = figure.getAttribute('data-group');
+      var items = groups[name] = groups[name] || [];
+      var img = figure.querySelector('img');
+      var label = figure.getAttribute('data-caption') || (figure.querySelector('figcaption') || {}).textContent || 'Photo';
+      var position = items.length;
+      items.push({ src: img.getAttribute('src'), alt: img.alt, caption: label });
+      if (figure.hidden) return;
+      var button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'zoom';
+      button.setAttribute('aria-label', 'Enlarge: ' + label);
+      img.parentNode.insertBefore(button, img);
+      button.appendChild(img);
+      button.addEventListener('click', function () {
+        group = items;
+        show(position);
+        dialog.showModal();
+        dialog.focus();
       });
     });
 
