@@ -4,15 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Noemeo — a second pair of eyes for your edits</title>
-<meta name="description" content="An independent perspective on your photography. Discuss your vision, challenge suggestions, and refine your edits together. You make the creative decisions. A Mac app that works with any editor. In closed beta.">
+<meta name="description" content="Automatic improvements can make a photograph look better. But better according to whom? Noemeo starts a conversation: an independent perspective that explains its suggestions and listens when you disagree. You make the decisions. A Mac app that works with any editor. In closed beta.">
 <meta property="og:title" content="Noemeo — a second pair of eyes for your edits">
-<meta property="og:description" content="An independent perspective on your photography. Discuss your vision, challenge suggestions, and refine your edits together. You make the creative decisions.">
+<meta property="og:description" content="Automatic improvements can make a photograph look better. But better according to whom? Noemeo starts a conversation: an independent perspective that explains its suggestions and listens when you disagree. You make the decisions.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://noemeo.com/">
-<meta property="og:image" content="https://noemeo.com/images/og.jpg">
+<meta property="og:image" content="https://noemeo.com/images/og-ski-lift.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Looking up into the vaults of Córdoba’s cathedral.">
+<meta property="og:image:alt" content="A wooden ski-lift station in snow below cloud-wrapped Alpine peaks.">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://noemeo.com/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%232a2a2a'/%3E%3Cellipse cx='16' cy='16' rx='9' ry='7' fill='none' stroke='%23ffd23f' stroke-width='3'/%3E%3C/svg%3E">
@@ -83,6 +83,8 @@
   .hero { padding: 2.5rem 0 3rem; }
   .hero h1 { max-width: 18ch; margin-bottom: 1rem; }
   .hero .lede { font-size: 1.15rem; color: var(--on-viewer); }
+  .intro { max-width: 62ch; }
+  .intro .motto { font-size: 1.15rem; font-weight: 600; margin: 1.5rem 0 0; }
   .cta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1.25rem; margin: 1.5rem 0 2.5rem; }
   .cta p { margin: 0; color: var(--on-viewer-soft); font-size: 0.95rem; }
   .asked { font-size: 1.15rem; margin-bottom: 1rem; }
@@ -116,6 +118,7 @@
   .story > .wrap > p { color: var(--ink); }
   .mat { background: var(--viewer); color: var(--on-viewer); border-radius: 6px; padding: 1rem; }
   .mat figcaption { color: var(--on-viewer-soft); }
+  .story .mat:has(.exchange) { margin-bottom: 1.5rem; }
   .cordoba-grid { display: grid; gap: 1rem; margin: 1.5rem 0 1rem; }
   @media (min-width: 860px) {
     .cordoba-grid { grid-template-columns: 1fr 1.5fr; align-items: start; }
@@ -207,49 +210,128 @@
   <main>
     <section class="viewer hero" aria-labelledby="title">
       <div class="wrap">
-        <h1 id="title">A second pair of eyes for your edits.</h1>
-        <p class="lede">An independent perspective on your photography. Discuss your vision, challenge suggestions, and refine your edits together. You make the creative decisions.</p>
+        <h1 id="title">A second pair of eyes for your edits</h1>
+        <div class="intro">
+          <p class="lede"><strong>Automatic improvements can make a photograph look better. But better according to whom?</strong></p>
+          <p>Modern editing software can intelligently adjust exposure, contrast, color, and even individual subjects. The results can be impressive. But these tools don’t know what caught your eye, what you felt when you pressed the shutter, or what you want your photograph to express.</p>
+          <p><strong>Noemeo takes a different approach.</strong></p>
+          <p>Instead of deciding what your photograph should look like, Noemeo starts a conversation. It offers an independent perspective, explains its suggestions, and listens when you disagree.</p>
+          <p>Together, you explore what works, what doesn’t, and what brings the photograph closer to your vision.</p>
+          <p class="motto">Your photograph. Your vision. Your decisions.</p>
+        </div>
         <div class="cta">
           <a class="button" href="#beta">Request beta access</a>
           <p>Mac app · any editor · your library stays on your computer</p>
         </div>
 
-        <p class="asked"><span class="said-by">The photographer, after darkening the bright windows in Córdoba:</span>“Is it better, or is it too much?”</p>
+        <p class="asked"><span class="said-by">Noemeo’s first read suggested cropping the hut out. The photographer replied:</span>“The hut is the anchor of the scene. In fact, it is the end station of a ski lift”</p>
         <div class="exchange">
-          <div class="pairing" data-gallery="cordoba">
-            <figure data-group="cordoba">
+          <div class="pairing">
+            <figure data-group="jungfrau">
               <span class="frame">
-                <img src="images/cordoba-original-windows.jpg" width="630" height="420"
-                     alt="Detail of the original: the lower vault in warm, pale gold light above a row of bright arched windows.">
+                <img src="images/jungfrau-camera.jpg" width="2000" height="1331"
+                     alt="Straight from the camera: a wooden ski-lift station in snow below cloud-wrapped Alpine peaks, with lift cables and posts in the foreground; the sky a heavy navy, the snow greyish and the hut a dark block.">
+                <span class="crop-shade" aria-hidden="true"></span>
+                <span class="crop-label">Suggested crop</span>
               </span>
-              <figcaption>Original</figcaption>
+              <figcaption>Straight from the camera</figcaption>
             </figure>
-            <figure data-group="cordoba">
-              <span class="frame">
-                <img src="images/cordoba-edit1-windows.jpg" width="630" height="420"
-                     alt="The same detail after the first edit: the windows dimmer, and the lower vault darker, cooler and nearly grey.">
-                <svg class="mark" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-                  <path class="keyline" vector-effect="non-scaling-stroke" d="M14 40 C14 18, 34 13, 46 15 C61 17, 66 30, 64 45 C62 62, 47 70, 35 68 C21 66, 13 55, 14 40 C15 30, 22 22, 30 19"/>
-                  <path class="pencil" vector-effect="non-scaling-stroke" d="M14 40 C14 18, 34 13, 46 15 C61 17, 66 30, 64 45 C62 62, 47 70, 35 68 C21 66, 13 55, 14 40 C15 30, 22 22, 30 19"/>
-                </svg>
-              </span>
-              <figcaption>First edit</figcaption>
+            <figure data-group="jungfrau">
+              <img src="images/jungfrau-final.jpg" width="2000" height="1331"
+                   alt="The photographer’s final, same framing: brighter snow, a deep blue sky opening above the peaks, and the station’s timber warm against the cold slope.">
+              <figcaption>The photographer’s final</figcaption>
             </figure>
           </div>
           <div class="callout">
             <span class="said-by">Noemeo</span>
-            <p class="verdict-line">Compared with the version you started with: further from what you were going for.</p>
-            <blockquote class="noemeo">“The lower central vault is about 15 L* darker, substantially cooler, and less saturated, turning the original warm continuation into a grey, relatively detached section.”</blockquote>
-            <p class="gloss">L* is lightness. Noemeo measured it from the two exported photos; it never sees your editor’s settings.</p>
+            <blockquote class="noemeo">“If the hut is the end station of a ski lift, the cables and posts aren't clutter; they're what it is.”</blockquote>
+            <p class="gloss">It stopped suggesting the crop. The photographer’s final keeps the framing; the edits were tone, colour and local detail.</p>
           </div>
         </div>
       </div>
     </section>
 
+    <section class="story" aria-labelledby="intent">
+      <div class="wrap">
+        <h2 id="intent">The ski lift: advice that follows your aim</h2>
+        <p>Once it knew what the photo was about, Noemeo judged every new version against that.</p>
+        <ol class="beats">
+          <li><span class="desc">Told the story, it still read the photo as Competent, and said why</span><blockquote class="noemeo">“The station is clearly an anchor, but its shaded facade has less visual presence than the bright slope and expansive cloud above it, leaving the human-versus-mountain relationship somewhat understated.”</blockquote></li>
+          <li><span class="desc">After three more versions, on the one before the final, it read Strong</span><blockquote class="noemeo">“The warm timber station gives this cold, expansive landscape a human foothold: its modest size against the mountains makes the ski infrastructure feel vulnerable rather than intrusive.”</blockquote></li>
+        </ol>
+        <p class="provenance">Excerpts from a real session, shared by the photographer, who made every edit. Noemeo’s replies are unedited.</p>
+        <details class="more">
+          <summary>Read the whole conversation</summary>
+          <div class="transcript">
+<div class="dialogue">
+<div class="turn ai"><span class="who">Noemeo</span><div class="said"><div class="assessment"><p class="assessment-head">Noemeo’s first read · <strong>Competent</strong></p><p class="tier-meaning">Competent and clearly intentional: it has a readable organizing idea and real merits, but remains limited, familiar, or incompletely resolved.</p><dl><dt>What works</dt><dd><p>The mountain emerging from cloud gives the scene a convincing sense of cold, altitude, and changing weather. Dark rock on the left balances the luminous mist on the right, while the fenced path leads toward that disappearance. The restrained blue-white palette and well-preserved snow texture make the brightness feel atmospheric rather than washed out.</p></dd><dt>What holds it back</dt><dd><p>The foreground hut, cables, and clipped posts compete with the mountain-and-cloud relationship without forming an equally compelling subject of their own. Their dark edges interrupt the otherwise spacious, quiet landscape and make the framing feel insufficiently selective. Numerous faint dust spots are also present in the plain snow and sky, mostly noticeable under magnification.</p></dd><dt>Leave as it is</dt><dd><ul><li>Keep the pale snow and luminous cloud rendering, which preserves subtle texture while conveying the brightness of high altitude.</li><li>Keep the mountain’s gradual loss of definition into mist; that atmospheric softness supplies the photograph’s mystery and depth.</li></ul></dd><dt>Edits to try</dt><dd><ul><li>Crop approximately 35% from the bottom, leaving the other edges unchanged, to remove the hut, cables, and foreground posts and concentrate attention on the mountain, path, and advancing cloud; this sacrifices foreground depth and the building’s human-scale reference in exchange for a more coherent panoramic landscape.</li></ul></dd></dl></div></div></div>
+<p class="omitted">New version</p>
+<div class="turn me"><span class="who">Photographer</span><div class="said"><p>Do you like this version more?</p></div></div>
+<div class="turn ai"><span class="who">Noemeo</span><div class="said"><p class="aside">Compared with the version you started with: closer to what you were going for.</p><p>Yes, this version does more for the photograph, and the blind comparison of the two files came out the same way. The deep blue upper-left sky gives the mountain a dark backdrop to emerge against, and the added clarity on the right-hand cloud gives the weather real structure instead of a soft haze. The mountain and chalet also separate better from the snow, which gives the scene more depth. Snow detail is intact: nothing is clipped to white.</p><p>It isn't a free trade, though. Saturation roughly doubled and the balance went cooler, so the mood has moved from pale, high-key mist toward a crisper, more dramatic alpine blue. The original's gentler merging of mist and snow was part of what I'd flagged to keep, and some of that softness is gone, especially in the cloud on the right, where the extra clarity makes it look more etched. Whether that's welcome depends on what you want the picture to feel like: quiet and dissolving, or bold and wintry. Which are you after?</p><p>One thing hasn't changed: the hut, cables and clipped posts in the foreground still compete with the mountain-and-cloud relationship, and the stronger contrast makes the hut's dark edges a bit more insistent.</p></div></div>
+<div class="turn me"><span class="who">Photographer</span><div class="said"><p>The hut is the anchor of the scene. In fact, it is the end station of a ski lift</p></div></div>
+<div class="turn ai"><span class="who">Noemeo</span><div class="said"><p>That changes how I read the foreground. If the hut is the end station of a ski lift, the cables and posts aren't clutter; they're what it is. The photograph then has a human anchor at the bottom, the mountain and cloud at the top, and the fenced path tying the two together, so the scale of the whole thing reads through that small station. I'll stop treating the hut, cables and posts as things working against the picture, and I'm not going to suggest trimming around them.</p><p>That also shifts how I'd judge your edit. The darker, more contrasty rendering gives the hut more weight against the snow, and that suits it as an anchor. The thing to watch is whether the stronger clarity and saturation start to make the mountain compete with it. As it stands, the hut holds its own against the mountain, which is a reasonable balance. Is the story the station beneath the mountain, or the lift as a way up into it?</p></div></div>
+<p class="omitted">New version</p>
+<div class="turn me"><span class="who">Photographer</span><div class="said"><p>Is it better?</p></div></div>
+<div class="turn ai"><span class="who">Noemeo</span><div class="said"><p class="aside">Compared with the version you started with: closer to what you were going for.</p><p>Yes, it's better than where you started. The blind comparison against the original agreed: the current version works better overall, and so does my own look. The deeper blue sky and darker midtones set the mountain off, the hut and snow sit with more weight, and the highlights keep their texture (nothing is clipped to white). Framing is identical, so the hut, cables and posts you want kept are all still there.</p><p>It is a different mood, though. Saturation roughly doubled and the balance went cooler, so the pale, high-key mist of the original has become a crisper, bluer winter scene. The mountain's soft dissolve into cloud is still there, but the right-hand cloud is more detailed than before, so a little of the original's hush has gone. If the hush mattered to you, that's the cost; if you wanted the station standing out against a dramatic sky, it's a good trade.</p><p>Against the version right before this one, the comparison also favours the current version. The sky is richer and bluer, and the cloud on the right has more structure than the softer, flatter earlier pass, so the last change helped too.</p></div></div>
+<div class="turn ai"><span class="who">Noemeo</span><div class="said"><div class="assessment"><p class="assessment-head">Noemeo’s read, with your story · <strong>Competent</strong></p><p class="tier-meaning">Competent and clearly intentional: it has a readable organizing idea and real merits, but remains limited, familiar, or incompletely resolved.</p><dl><dt>What works</dt><dd><p>The lift station gives the mountain landscape a human foothold: its warm timber and solid geometry contrast with the cold snow and peaks disappearing into cloud. The ascending fence carries the eye from the foreground toward that disappearance, suggesting a route into uncertain weather. Preserved snow texture, clearly rendered rock, and softer atmospheric distance make the scene feel spacious and convincingly cold.</p></dd><dt>What holds it back</dt><dd><p>The station is clearly an anchor, but its shaded facade has less visual presence than the bright slope and expansive cloud above it, leaving the human-versus-mountain relationship somewhat understated. The foreground posts add a little competing edge activity, although they belong to the lift setting. Faint dust spots are present in plain areas, mostly noticeable only at magnification.</p></dd><dt>Leave as it is</dt><dd><ul><li>Keep the cloud-softened mountains and broad pale area on the right: their loss of definition conveys changing weather and makes the station feel exposed.</li><li>Keep the cool snow and blue shadows, which establish the alpine cold against the station’s warmer wood.</li></ul></dd><dt>Edits to try</dt><dd><ul><li>Gently lift the station’s timber midtones locally, without brightening its snow-covered roof, so the intended anchor holds attention against the bright slope; this would slightly reduce its shadowed, sheltered feeling, so keep the adjustment restrained.</li></ul></dd></dl></div></div></div>
+<p class="omitted">New version</p>
+<div class="turn me"><span class="who">Photographer</span><div class="said"><p>lifted the station’s timber midtones</p></div></div>
+<div class="turn ai"><span class="who">Noemeo</span><div class="said"><p class="aside">Compared with your previous version: hard to tell.</p><p>I'm not sure the measurements show it. Between the version before and this one, the only measured change is shadows up about 2 L*, which fits a small lift in the darkest parts of the frame but is too faint to say it hit the station's timber specifically. These numbers can miss very local edits, so I'm not ruling it out. Judging the image itself: the timber does read slightly warmer and more present against the snow than in the earlier version, and the facade is still the darkest, warmest mass in the frame, which is what lets the station hold its place as the anchor. That was the thing the assessment found understated, so the direction is right. The mountain and cloud, now with stronger clarity, are still the louder voices, and the station is only partly closing that gap. If you want to take it further, a gentle local lift on the facade would do it. The cost is that pushing too far flattens the contrast that makes the wood feel solid and warm against the cold snow.</p></div></div>
+<p class="omitted">Left out: an edit card with Lightroom steps</p>
+<p class="omitted">New version</p>
+<div class="turn me"><span class="who">Photographer</span><div class="said"><p>Can you see the difference now?</p></div></div>
+<div class="turn ai"><span class="who">Noemeo</span><div class="said"><p class="aside">Compared with your previous version: closer to what you were going for.</p><p>Looking at the current version directly, yes, but only just. The measurements against the version before show fine detail up about 9% and mid-scale detail up about 5%, all in the lower-left to centre of the frame, roughly where the hut and the snow around it sit. They show no change in brightness or colour there, so what you've done reads as added crispness, not a lift in the timber's tone. In the image the planking and the window and door details are a little more distinct, and the hut picks up some extra local contrast against the snow. That helps it hold its own slightly better as the anchor, because it now has more definition to set against the busy cloud and mountain. But the wood itself isn't visibly lighter or warmer than before, so if your aim was brightening the midtones, the edit may not have landed, or it's too faint to measure. The cost to watch is that sharpening and clarity on the wood and the surrounding snow can start to look crunchy, so check the snow near the base of the hut at full size. If you want the facade to carry more weight, a small local lift in exposure or shadows on the wood would do more than more texture.</p></div></div>
+<p class="omitted">New version</p>
+<div class="turn me"><span class="who">Photographer</span><div class="said"><p>I lifted exposure locally and slightly lifted temperature, too</p></div></div>
+<div class="turn ai"><span class="who">Noemeo</span><div class="said"><p class="aside">Compared with your previous version: closer to what you were going for.</p><p>That fits the earlier measurements, and I should correct myself. The version before this one showed a small local change over the hut area (roughly x 27%-48%, y 79%-89%) that was more saturated and warmer, which matches a slight temperature lift there, and I read it as sharpening only. Against that version, this latest export shows the shadows up about 2 L*, which fits a gentle local exposure lift, though it's too faint for me to say it landed on the hut specifically. Looking at the image directly, the timber does read a touch brighter and warmer, and the facade is more legible, with the planks, windows and door easier to separate from the dark base. That's the right direction for the station: the warm wood against the cold snow and blue shadows is the human-versus-mountain contrast the photo runs on, and you've nudged it without breaking the cool palette. The restraint is working. Two things to watch: if the warmth keeps rising, the hut can start to look pasted onto the scene instead of lit by the same cold light, and if the lift reaches the snow around its base you'll lose some of the shade that makes it feel tucked into the slope. Right now it holds together. The station is still the quieter voice next to the clarified mountain and cloud, so a little more lift would help, but I'd stop well short of making it glow.</p></div></div>
+<div class="turn ai"><span class="who">Noemeo</span><div class="said"><div class="assessment"><p class="assessment-head">Noemeo’s read, with your story · <strong>Strong</strong></p><p class="tier-meaning">Strong: coherent, engaging, and substantially resolved, with qualities that sustain attention beyond competent execution.</p><dl><dt>What works</dt><dd><p>The warm timber station gives this cold, expansive landscape a human foothold: its modest size against the mountains makes the ski infrastructure feel vulnerable rather than intrusive. The diagonal fence carries the eye uphill into cloud, while the cables connect the hut to the surrounding terrain. Detailed snow, rugged rock and dissolving peaks create a convincing progression from tangible shelter to uncertain weather.</p></dd><dt>What holds it back</dt><dd><p>The hut anchors the composition, but its shaded facade has less visual presence than the broad sunlit slope, so the intended story takes a moment to register. The image conveys alpine scale more strongly than a distinctive moment at the lift station; the infrastructure is legible, but largely inactive. Faint dust spots are present in plain areas, mostly noticeable only under magnification.</p></dd><dt>Leave as it is</dt><dd><ul><li>Keep the soft, low-contrast mountains within the cloud, which convey moving weather and make the clearly defined station feel grounded.</li><li>Keep the broad pale snowfields and cloud space, which establish the station’s small scale and the exposed character of its setting.</li></ul></dd><dt>Edits to try</dt><dd><ul><li>Gently lift the timber facade’s midtones without brightening its snowy roof, giving the station more presence against the luminous slope; too much lifting would sacrifice the convincing sense that the building sits in cold shade.</li></ul></dd></dl></div></div></div>
+<p class="omitted">New version</p>
+<div class="turn me"><span class="who">Photographer</span><div class="said"><p>Reduced global exposure by 1/4 stop</p></div></div>
+<div class="turn ai"><span class="who">Noemeo</span><div class="said"><p>I can't see a clean comparison for that step. Nothing was measured between the last version and this one, so I'll judge it by eye, and a quarter stop is a small move that the measurements may simply miss. What I can say is that the image still holds together. The snow keeps its texture and gradation, with nothing clipped to white and almost nothing crushed to black, so the quarter stop hasn't cost you highlight detail, which was the main thing to protect with this much white in the frame. The trade is quieter than the rest of the edit. A global drop deepens the already cooler, darker midtones, and the soft hush of the original pale mist drifts a bit further away. The timber is where it matters most: you lifted it locally and warmed it, and a global pull-down takes a little of that back, since the wood and the snow around it both darken. If the hut felt right a moment ago, check that it still holds its own against the slope. If it now sits a little quiet, the fix is to restore the local lift on the facade rather than undo the global change. The sunlit snow and the sky are the parts that gain from the lower exposure, with the brightest snowfields and the cloud edge looking calmer. So is the aim a moodier, heavier winter feel, or were you protecting highlights? That decides whether the quarter stop is a keeper.</p></div></div>
+<div class="turn me"><span class="who">Photographer</span><div class="said"><p>Exactly, I aimed at the snow and the sky. I wouldn't make timber warmer or brighter than it is now</p></div></div>
+<div class="turn ai"><span class="who">Noemeo</span><div class="said"><p>That settles it: the quarter stop was for the snow and sky, and the timber stays as it is, so I'll stop nudging it. That also retires my earlier idea of a little more lift on the facade. Judged on what you aimed at, the global pull-down does its job. The sunlit slope and cloud edge sit a bit calmer, and nothing is clipped, so the snow texture is intact. I'd only keep an eye on one thing at full size: the slope is the broadest surface in the frame, so any further darkening will start to turn the white toward grey. Right now it still reads as bright snow, so I'd stop here.</p></div></div>
+</div>
+            <p class="fine">Every turn, unedited, without the edit card with Lightroom steps Noemeo attached to one reply.</p>
+          </div>
+        </details>
+      </div>
+    </section>
+
     <section class="story" aria-labelledby="cordoba">
       <div class="wrap">
-        <h2 id="cordoba">Córdoba: back to the sliders</h2>
-        <p>Noemeo never saw the mask, only the exported photos. It found from the pixels what the photographer hadn’t noticed: the new Lightroom mask had turned saturation down too. Two edits later:</p>
+        <h2 id="cordoba">Córdoba: what the measurements caught</h2>
+        <p class="asked"><span class="said-by">The photographer, after darkening the bright windows in Córdoba:</span>“Is it better, or is it too much?”</p>
+        <div class="mat">
+          <div class="exchange">
+            <div class="pairing" data-gallery="cordoba">
+              <figure data-group="cordoba">
+                <span class="frame">
+                  <img src="images/cordoba-original-windows.jpg" width="630" height="420" loading="lazy"
+                       alt="Detail of the original: the lower vault in warm, pale gold light above a row of bright arched windows.">
+                </span>
+                <figcaption>Original</figcaption>
+              </figure>
+              <figure data-group="cordoba">
+                <span class="frame">
+                  <img src="images/cordoba-edit1-windows.jpg" width="630" height="420" loading="lazy"
+                       alt="The same detail after the first edit: the windows dimmer, and the lower vault darker, cooler and nearly grey.">
+                  <svg class="mark" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+                    <path class="keyline" vector-effect="non-scaling-stroke" d="M14 40 C14 18, 34 13, 46 15 C61 17, 66 30, 64 45 C62 62, 47 70, 35 68 C21 66, 13 55, 14 40 C15 30, 22 22, 30 19"/>
+                    <path class="pencil" vector-effect="non-scaling-stroke" d="M14 40 C14 18, 34 13, 46 15 C61 17, 66 30, 64 45 C62 62, 47 70, 35 68 C21 66, 13 55, 14 40 C15 30, 22 22, 30 19"/>
+                  </svg>
+                </span>
+                <figcaption>First edit</figcaption>
+              </figure>
+            </div>
+            <div class="callout">
+              <span class="said-by">Noemeo</span>
+              <p class="verdict-line">Compared with the version you started with: further from what you were going for.</p>
+              <blockquote class="noemeo">“The lower central vault is about 15 L* darker, substantially cooler, and less saturated, turning the original warm continuation into a grey, relatively detached section.”</blockquote>
+              <p class="gloss">L* is lightness. Noemeo measured it from the two exported photos; it never sees your editor’s settings.</p>
+            </div>
+          </div>
+        </div>
+        <p>From the pixels alone, Noemeo found what the photographer hadn’t noticed: the new Lightroom mask had turned saturation down too. Two edits later:</p>
         <div class="cordoba-grid">
           <figure class="mat" data-group="cordoba-whole" data-caption="The whole photo, final version">
             <span class="frame">
@@ -315,73 +397,6 @@
               </div>
             </div>
             <p class="fine">Every turn up to the final edit, unedited, without the step-by-step Lightroom suggestions Noemeo attached to two replies.</p>
-          </div>
-        </details>
-      </div>
-    </section>
-
-    <section class="story" aria-labelledby="intent">
-      <div class="wrap">
-        <h2 id="intent">Telling it what you meant</h2>
-        <p>Noemeo’s first read suggested cropping the hut out. Then the photographer said what it was.</p>
-        <div class="mat">
-          <div class="two-up">
-            <figure data-group="jungfrau">
-              <span class="frame">
-                <img src="images/jungfrau-camera.jpg" width="2000" height="1331" loading="lazy"
-                     alt="Straight from the camera: a wooden ski-lift station in snow below cloud-wrapped Alpine peaks, with lift cables and posts in the foreground; the sky a heavy navy, the snow greyish and the hut a dark block.">
-                <span class="crop-shade" aria-hidden="true"></span>
-                <span class="crop-label">Suggested crop</span>
-              </span>
-              <figcaption>Straight from the camera</figcaption>
-            </figure>
-            <figure data-group="jungfrau">
-              <img src="images/jungfrau-final.jpg" width="2000" height="1331" loading="lazy"
-                   alt="The photographer’s final, same framing: brighter snow, a deep blue sky opening above the peaks, and the station’s timber warm against the cold slope.">
-              <figcaption>The photographer’s final</figcaption>
-            </figure>
-          </div>
-          <p class="pair-note">Same framing. The photographer’s edits were tone, colour and local detail; the crop Noemeo first suggested wasn’t taken.</p>
-        </div>
-        <ol class="beats">
-          <li><span class="desc">Noemeo’s first read, on an early version, suggested cropping about 35% from the bottom</span><blockquote class="noemeo">“to remove the hut, cables, and foreground posts”</blockquote></li>
-          <li><span class="said-by">The photographer</span>“The hut is the anchor of the scene. In fact, it is the end station of a ski lift”</li>
-          <li><span class="said-by">Noemeo</span><blockquote class="noemeo">“If the hut is the end station of a ski lift, the cables and posts aren't clutter; they're what it is.”</blockquote></li>
-          <li><span class="desc">Told the story, it still read the photo as Competent. After three more versions, on the one before the final, it read Strong:</span><blockquote class="noemeo">“The warm timber station gives this cold, expansive landscape a human foothold: its modest size against the mountains makes the ski infrastructure feel vulnerable rather than intrusive.”</blockquote></li>
-        </ol>
-        <p class="provenance">Excerpts from a real session, shared by the photographer, who made every edit. Noemeo’s replies are unedited.</p>
-        <details class="more">
-          <summary>Read the whole conversation</summary>
-          <div class="transcript">
-<div class="dialogue">
-<div class="turn ai"><span class="who">Noemeo</span><div class="said"><div class="assessment"><p class="assessment-head">Noemeo’s first read · <strong>Competent</strong></p><p class="tier-meaning">Competent and clearly intentional: it has a readable organizing idea and real merits, but remains limited, familiar, or incompletely resolved.</p><dl><dt>What works</dt><dd><p>The mountain emerging from cloud gives the scene a convincing sense of cold, altitude, and changing weather. Dark rock on the left balances the luminous mist on the right, while the fenced path leads toward that disappearance. The restrained blue-white palette and well-preserved snow texture make the brightness feel atmospheric rather than washed out.</p></dd><dt>What holds it back</dt><dd><p>The foreground hut, cables, and clipped posts compete with the mountain-and-cloud relationship without forming an equally compelling subject of their own. Their dark edges interrupt the otherwise spacious, quiet landscape and make the framing feel insufficiently selective. Numerous faint dust spots are also present in the plain snow and sky, mostly noticeable under magnification.</p></dd><dt>Leave as it is</dt><dd><ul><li>Keep the pale snow and luminous cloud rendering, which preserves subtle texture while conveying the brightness of high altitude.</li><li>Keep the mountain’s gradual loss of definition into mist; that atmospheric softness supplies the photograph’s mystery and depth.</li></ul></dd><dt>Edits to try</dt><dd><ul><li>Crop approximately 35% from the bottom, leaving the other edges unchanged, to remove the hut, cables, and foreground posts and concentrate attention on the mountain, path, and advancing cloud; this sacrifices foreground depth and the building’s human-scale reference in exchange for a more coherent panoramic landscape.</li></ul></dd></dl></div></div></div>
-<p class="omitted">New version</p>
-<div class="turn me"><span class="who">Photographer</span><div class="said"><p>Do you like this version more?</p></div></div>
-<div class="turn ai"><span class="who">Noemeo</span><div class="said"><p class="aside">Compared with the version you started with: closer to what you were going for.</p><p>Yes, this version does more for the photograph, and the blind comparison of the two files came out the same way. The deep blue upper-left sky gives the mountain a dark backdrop to emerge against, and the added clarity on the right-hand cloud gives the weather real structure instead of a soft haze. The mountain and chalet also separate better from the snow, which gives the scene more depth. Snow detail is intact: nothing is clipped to white.</p><p>It isn't a free trade, though. Saturation roughly doubled and the balance went cooler, so the mood has moved from pale, high-key mist toward a crisper, more dramatic alpine blue. The original's gentler merging of mist and snow was part of what I'd flagged to keep, and some of that softness is gone, especially in the cloud on the right, where the extra clarity makes it look more etched. Whether that's welcome depends on what you want the picture to feel like: quiet and dissolving, or bold and wintry. Which are you after?</p><p>One thing hasn't changed: the hut, cables and clipped posts in the foreground still compete with the mountain-and-cloud relationship, and the stronger contrast makes the hut's dark edges a bit more insistent.</p></div></div>
-<div class="turn me"><span class="who">Photographer</span><div class="said"><p>The hut is the anchor of the scene. In fact, it is the end station of a ski lift</p></div></div>
-<div class="turn ai"><span class="who">Noemeo</span><div class="said"><p>That changes how I read the foreground. If the hut is the end station of a ski lift, the cables and posts aren't clutter; they're what it is. The photograph then has a human anchor at the bottom, the mountain and cloud at the top, and the fenced path tying the two together, so the scale of the whole thing reads through that small station. I'll stop treating the hut, cables and posts as things working against the picture, and I'm not going to suggest trimming around them.</p><p>That also shifts how I'd judge your edit. The darker, more contrasty rendering gives the hut more weight against the snow, and that suits it as an anchor. The thing to watch is whether the stronger clarity and saturation start to make the mountain compete with it. As it stands, the hut holds its own against the mountain, which is a reasonable balance. Is the story the station beneath the mountain, or the lift as a way up into it?</p></div></div>
-<p class="omitted">New version</p>
-<div class="turn me"><span class="who">Photographer</span><div class="said"><p>Is it better?</p></div></div>
-<div class="turn ai"><span class="who">Noemeo</span><div class="said"><p class="aside">Compared with the version you started with: closer to what you were going for.</p><p>Yes, it's better than where you started. The blind comparison against the original agreed: the current version works better overall, and so does my own look. The deeper blue sky and darker midtones set the mountain off, the hut and snow sit with more weight, and the highlights keep their texture (nothing is clipped to white). Framing is identical, so the hut, cables and posts you want kept are all still there.</p><p>It is a different mood, though. Saturation roughly doubled and the balance went cooler, so the pale, high-key mist of the original has become a crisper, bluer winter scene. The mountain's soft dissolve into cloud is still there, but the right-hand cloud is more detailed than before, so a little of the original's hush has gone. If the hush mattered to you, that's the cost; if you wanted the station standing out against a dramatic sky, it's a good trade.</p><p>Against the version right before this one, the comparison also favours the current version. The sky is richer and bluer, and the cloud on the right has more structure than the softer, flatter earlier pass, so the last change helped too.</p></div></div>
-<div class="turn ai"><span class="who">Noemeo</span><div class="said"><div class="assessment"><p class="assessment-head">Noemeo’s read, with your story · <strong>Competent</strong></p><p class="tier-meaning">Competent and clearly intentional: it has a readable organizing idea and real merits, but remains limited, familiar, or incompletely resolved.</p><dl><dt>What works</dt><dd><p>The lift station gives the mountain landscape a human foothold: its warm timber and solid geometry contrast with the cold snow and peaks disappearing into cloud. The ascending fence carries the eye from the foreground toward that disappearance, suggesting a route into uncertain weather. Preserved snow texture, clearly rendered rock, and softer atmospheric distance make the scene feel spacious and convincingly cold.</p></dd><dt>What holds it back</dt><dd><p>The station is clearly an anchor, but its shaded facade has less visual presence than the bright slope and expansive cloud above it, leaving the human-versus-mountain relationship somewhat understated. The foreground posts add a little competing edge activity, although they belong to the lift setting. Faint dust spots are present in plain areas, mostly noticeable only at magnification.</p></dd><dt>Leave as it is</dt><dd><ul><li>Keep the cloud-softened mountains and broad pale area on the right: their loss of definition conveys changing weather and makes the station feel exposed.</li><li>Keep the cool snow and blue shadows, which establish the alpine cold against the station’s warmer wood.</li></ul></dd><dt>Edits to try</dt><dd><ul><li>Gently lift the station’s timber midtones locally, without brightening its snow-covered roof, so the intended anchor holds attention against the bright slope; this would slightly reduce its shadowed, sheltered feeling, so keep the adjustment restrained.</li></ul></dd></dl></div></div></div>
-<p class="omitted">New version</p>
-<div class="turn me"><span class="who">Photographer</span><div class="said"><p>lifted the station’s timber midtones</p></div></div>
-<div class="turn ai"><span class="who">Noemeo</span><div class="said"><p class="aside">Compared with your previous version: hard to tell.</p><p>I'm not sure the measurements show it. Between the version before and this one, the only measured change is shadows up about 2 L*, which fits a small lift in the darkest parts of the frame but is too faint to say it hit the station's timber specifically. These numbers can miss very local edits, so I'm not ruling it out. Judging the image itself: the timber does read slightly warmer and more present against the snow than in the earlier version, and the facade is still the darkest, warmest mass in the frame, which is what lets the station hold its place as the anchor. That was the thing the assessment found understated, so the direction is right. The mountain and cloud, now with stronger clarity, are still the louder voices, and the station is only partly closing that gap. If you want to take it further, a gentle local lift on the facade would do it. The cost is that pushing too far flattens the contrast that makes the wood feel solid and warm against the cold snow.</p></div></div>
-<p class="omitted">Left out: an edit card with Lightroom steps</p>
-<p class="omitted">New version</p>
-<div class="turn me"><span class="who">Photographer</span><div class="said"><p>Can you see the difference now?</p></div></div>
-<div class="turn ai"><span class="who">Noemeo</span><div class="said"><p class="aside">Compared with your previous version: closer to what you were going for.</p><p>Looking at the current version directly, yes, but only just. The measurements against the version before show fine detail up about 9% and mid-scale detail up about 5%, all in the lower-left to centre of the frame, roughly where the hut and the snow around it sit. They show no change in brightness or colour there, so what you've done reads as added crispness, not a lift in the timber's tone. In the image the planking and the window and door details are a little more distinct, and the hut picks up some extra local contrast against the snow. That helps it hold its own slightly better as the anchor, because it now has more definition to set against the busy cloud and mountain. But the wood itself isn't visibly lighter or warmer than before, so if your aim was brightening the midtones, the edit may not have landed, or it's too faint to measure. The cost to watch is that sharpening and clarity on the wood and the surrounding snow can start to look crunchy, so check the snow near the base of the hut at full size. If you want the facade to carry more weight, a small local lift in exposure or shadows on the wood would do more than more texture.</p></div></div>
-<p class="omitted">New version</p>
-<div class="turn me"><span class="who">Photographer</span><div class="said"><p>I lifted exposure locally and slightly lifted temperature, too</p></div></div>
-<div class="turn ai"><span class="who">Noemeo</span><div class="said"><p class="aside">Compared with your previous version: closer to what you were going for.</p><p>That fits the earlier measurements, and I should correct myself. The version before this one showed a small local change over the hut area (roughly x 27%-48%, y 79%-89%) that was more saturated and warmer, which matches a slight temperature lift there, and I read it as sharpening only. Against that version, this latest export shows the shadows up about 2 L*, which fits a gentle local exposure lift, though it's too faint for me to say it landed on the hut specifically. Looking at the image directly, the timber does read a touch brighter and warmer, and the facade is more legible, with the planks, windows and door easier to separate from the dark base. That's the right direction for the station: the warm wood against the cold snow and blue shadows is the human-versus-mountain contrast the photo runs on, and you've nudged it without breaking the cool palette. The restraint is working. Two things to watch: if the warmth keeps rising, the hut can start to look pasted onto the scene instead of lit by the same cold light, and if the lift reaches the snow around its base you'll lose some of the shade that makes it feel tucked into the slope. Right now it holds together. The station is still the quieter voice next to the clarified mountain and cloud, so a little more lift would help, but I'd stop well short of making it glow.</p></div></div>
-<div class="turn ai"><span class="who">Noemeo</span><div class="said"><div class="assessment"><p class="assessment-head">Noemeo’s read, with your story · <strong>Strong</strong></p><p class="tier-meaning">Strong: coherent, engaging, and substantially resolved, with qualities that sustain attention beyond competent execution.</p><dl><dt>What works</dt><dd><p>The warm timber station gives this cold, expansive landscape a human foothold: its modest size against the mountains makes the ski infrastructure feel vulnerable rather than intrusive. The diagonal fence carries the eye uphill into cloud, while the cables connect the hut to the surrounding terrain. Detailed snow, rugged rock and dissolving peaks create a convincing progression from tangible shelter to uncertain weather.</p></dd><dt>What holds it back</dt><dd><p>The hut anchors the composition, but its shaded facade has less visual presence than the broad sunlit slope, so the intended story takes a moment to register. The image conveys alpine scale more strongly than a distinctive moment at the lift station; the infrastructure is legible, but largely inactive. Faint dust spots are present in plain areas, mostly noticeable only under magnification.</p></dd><dt>Leave as it is</dt><dd><ul><li>Keep the soft, low-contrast mountains within the cloud, which convey moving weather and make the clearly defined station feel grounded.</li><li>Keep the broad pale snowfields and cloud space, which establish the station’s small scale and the exposed character of its setting.</li></ul></dd><dt>Edits to try</dt><dd><ul><li>Gently lift the timber facade’s midtones without brightening its snowy roof, giving the station more presence against the luminous slope; too much lifting would sacrifice the convincing sense that the building sits in cold shade.</li></ul></dd></dl></div></div></div>
-<p class="omitted">New version</p>
-<div class="turn me"><span class="who">Photographer</span><div class="said"><p>Reduced global exposure by 1/4 stop</p></div></div>
-<div class="turn ai"><span class="who">Noemeo</span><div class="said"><p>I can't see a clean comparison for that step. Nothing was measured between the last version and this one, so I'll judge it by eye, and a quarter stop is a small move that the measurements may simply miss. What I can say is that the image still holds together. The snow keeps its texture and gradation, with nothing clipped to white and almost nothing crushed to black, so the quarter stop hasn't cost you highlight detail, which was the main thing to protect with this much white in the frame. The trade is quieter than the rest of the edit. A global drop deepens the already cooler, darker midtones, and the soft hush of the original pale mist drifts a bit further away. The timber is where it matters most: you lifted it locally and warmed it, and a global pull-down takes a little of that back, since the wood and the snow around it both darken. If the hut felt right a moment ago, check that it still holds its own against the slope. If it now sits a little quiet, the fix is to restore the local lift on the facade rather than undo the global change. The sunlit snow and the sky are the parts that gain from the lower exposure, with the brightest snowfields and the cloud edge looking calmer. So is the aim a moodier, heavier winter feel, or were you protecting highlights? That decides whether the quarter stop is a keeper.</p></div></div>
-<div class="turn me"><span class="who">Photographer</span><div class="said"><p>Exactly, I aimed at the snow and the sky. I wouldn't make timber warmer or brighter than it is now</p></div></div>
-<div class="turn ai"><span class="who">Noemeo</span><div class="said"><p>That settles it: the quarter stop was for the snow and sky, and the timber stays as it is, so I'll stop nudging it. That also retires my earlier idea of a little more lift on the facade. Judged on what you aimed at, the global pull-down does its job. The sunlit slope and cloud edge sit a bit calmer, and nothing is clipped, so the snow texture is intact. I'd only keep an eye on one thing at full size: the slope is the broadest surface in the frame, so any further darkening will start to turn the white toward grey. Right now it still reads as bright snow, so I'd stop here.</p></div></div>
-</div>
-            <p class="fine">Every turn, unedited, without the edit card with Lightroom steps Noemeo attached to one reply.</p>
           </div>
         </details>
       </div>
