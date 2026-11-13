@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Noemeo checkout (sandbox)</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%232a2a2a'/%3E%3Cellipse cx='16' cy='16' rx='9' ry='7' fill='none' stroke='%23ffd23f' stroke-width='3'/%3E%3C/svg%3E">
+<!--
+  Paddle's default payment link for the SANDBOX account (dev photo-api).
+  The Noemeo app opens a transaction's checkout URL, which is this page
+  plus ?_ptxn=txn_...; Paddle.js then opens Paddle's own checkout for
+  that transaction over the page. Card details are entered in Paddle's
+  frame and never reach this page or Noemeo. This page stores nothing
+  itself and has no backend. Credits are granted by photo-api's webhook,
+  never by this page. noemeo-photo docs/accounts-and-billing-design.md,
+  flow B.
+-->
+<style>
+  :root {
+    --paper: #ededed;
+    --ink: #1a1a1a;
+    --ink-soft: #5c5c5c;
+    --mark: #ffd23f;
+    --sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans);
+         font-size: 17px; line-height: 1.6; }
+  main { max-width: 32rem; margin: 18vh auto 0; padding: 0 16px; }
+  h1 { font-weight: 600; letter-spacing: -0.01em; font-size: 1.6rem; line-height: 1.25; margin: 0 0 0.75rem; }
+  p { color: var(--ink-soft); margin: 0 0 0.75rem; }
+  a { color: var(--ink); }
+  a:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+  .sandbox { display: inline-block; background: var(--mark); color: var(--ink); font-size: 0.75rem;
+             font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; padding: 0.15rem 0.5rem;
+             border-radius: 4px; margin-bottom: 1rem; }
+  .help { font-size: 0.9rem; margin-top: 1.5rem; }
+</style>
+</head>
+<body>
+<main>
+  <span class="sandbox">Sandbox: no real payments</span>
+  <div role="status" aria-live="polite">
+    <h1 id="title">Opening checkout…</h1>
+    <p id="detail">Paddle, our payment provider and merchant of record, takes the payment and emails your receipt. Check that it's the pass you chose in the Noemeo app.</p>
+  </div>
+  <noscript><p>Checkout needs JavaScript. Turn it on for this page, then choose Buy pass in the Noemeo app again.</p></noscript>
+  <p class="help">Trouble paying? Write to <a href="mailto:ilya@noemeo.com">ilya@noemeo.com</a>. <a href="/">About Noemeo</a></p>
+</main>
+<script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
+<script>
+  // A client-side token is public by design: it can only open checkouts.
+  const CLIENT_TOKEN = "test_7be3e1058436159e5eb6594e00b";
+  // If Paddle hasn't shown the checkout by then, say so instead of waiting forever.
+  const LOAD_TIMEOUT_MS = 20000;
+
+  const title = document.getElementById("title");
+  const detail = document.getElementById("detail");
+  function show(heading, text) { title.textContent = heading; detail.textContent = text; }
+  let paid = false;
+  let loaded = false;
+  let failed = false;
+  let timedOut = false;  // only a timeout's "invalid" may be undone; a real error stays
+  function invalid() {
+    failed = true;
+    show("This checkout link isn't valid",
+      "It may have expired or already been paid. Choose Buy pass in the Noemeo app to start again.");
+  }
+  function opened() {
+    // Any sign of a working checkout; undo a timeout that fired on a slow load.
+    loaded = true;
+    if (failed && timedOut && !paid) {
+      failed = false;
+      show("Checkout is open", "Paddle, our payment provider and merchant of record, takes the payment and emails your receipt.");
+    }
+  }
+
+  if (!new URLSearchParams(location.search).has("_ptxn")) {
+    show("Buy a pass from the Noemeo app",
+      "Open Noemeo's account panel and choose a pass; checkout opens in your browser.");
+  } else if (typeof Paddle === "undefined") {
+    show("Checkout couldn't load",
+      "Check your connection or content blocker, then choose Buy pass in the Noemeo app again.");
+  } else {
+    Paddle.Environment.set("sandbox");
+    Paddle.Initialize({
+      token: CLIENT_TOKEN,
+      // With _ptxn in the URL, Paddle.js opens that transaction's checkout.
+      eventCallback(event) {
+        switch (event.name) {
+          case "checkout.completed":
+            paid = true;
+            show("Payment received",
+              "Return to Noemeo. Your credits will appear shortly; the app updates by itself.");
+            break;
+          case "checkout.error":
+            if (!loaded) invalid();
+            break;
+          case "checkout.closed":
+            // Also fires after a declined or still-processing payment, so
+            // don't claim nothing was charged.
+            if (!paid && !failed) show("Checkout closed",
+              "If you were charged, your credits will still appear in the app. To buy, choose Buy pass in Noemeo again.");
+            break;
+          default:
+            // checkout.loaded and every later step prove the checkout opened.
+            if (String(event.name).startsWith("checkout.")) opened();
+        }
+      },
+    });
+    setTimeout(() => { if (!loaded && !paid && !failed) { timedOut = true; invalid(); } }, LOAD_TIMEOUT_MS);
+  }
+</script>
+</body>
+</html>
